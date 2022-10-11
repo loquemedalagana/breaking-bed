@@ -1,0 +1,3 @@
+export const DEVICE_MOBILE_WIDTH = 768;
+export const DEVICE_TABLET_WIDTH = 900;
+export const DEVICE_DESKTOP_WIDTH = 1200;
