@@ -1,6 +1,7 @@
 import { Dispatch, useReducer } from 'react';
 
 import {
+  RANDOM_QUOTE_INIT,
   RANDOM_QUOTE_ERROR,
   RANDOM_QUOTE_LOADING,
   RANDOM_QUOTE_SUCCESS,
@@ -16,7 +17,7 @@ export interface RandomQuoteState {
 
 export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteActionType): RandomQuoteState => {
   switch (action.type) {
-    case 'RANDOM_QUOTE__INIT':
+    case RANDOM_QUOTE_INIT:
       return {
         loading: false,
         data: null,

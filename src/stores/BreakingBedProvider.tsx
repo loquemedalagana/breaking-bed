@@ -1,6 +1,9 @@
 import React from 'react';
 
-import CharacterDetailProvider from 'src/stores/CharacterDetailProvider';
+import useCharacterDetailReducer from 'src/reducers/useCharacterDetailReducer';
+import useRandomQuoteReducer from 'src/reducers/useCharacterRandomQuoteReducer';
+
+import { CharacterDetailContext, RandomQuoteContext } from 'src/stores/contexts';
 
 interface Props {
   children: React.ReactNode;
@@ -8,7 +11,14 @@ interface Props {
 
 // Redux Provider should be added
 const BreakingBedProvider: React.FC<Props> = ({ children }) => {
-  return <CharacterDetailProvider>{children}</CharacterDetailProvider>;
+  const characterDetailReducer = useCharacterDetailReducer();
+  const randomQuoteReducer = useRandomQuoteReducer();
+
+  return (
+    <CharacterDetailContext.Provider value={characterDetailReducer}>
+      <RandomQuoteContext.Provider value={randomQuoteReducer}>{children}</RandomQuoteContext.Provider>
+    </CharacterDetailContext.Provider>
+  );
 };
 
 export default BreakingBedProvider;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
 import CharacterDetailPage from 'src/pages/CharacterDetailPage';
@@ -5,7 +6,7 @@ import CharacterListPage from 'src/pages/CharacterListPage';
 import ErrorPage from 'src/pages/ErrorPage';
 import * as routeURL from 'src/routes/routeURL';
 import RootLayout from 'src/routes/RootLayout';
-import React from 'react';
+import { URL_ERROR } from 'src/routes/routeURL';
 
 const routes: RouteObject[] = [
   {
@@ -22,6 +23,10 @@ const routes: RouteObject[] = [
         element: <CharacterDetailPage />,
       },
     ],
+  },
+  {
+    path: URL_ERROR,
+    element: <ErrorPage />,
   },
 ];
 

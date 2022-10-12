@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
@@ -13,12 +14,19 @@ const ErrorPageBox = styled.section`
 
 const Error: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleGoBack = (): void => {
+    navigate(-1);
+  };
 
   return (
     <ErrorPageBox>
       <h1>Error..</h1>
-      <h2>Error code will be here</h2>
-      <Button variant="contained">{t('button:go back')}</Button>
+      <h2>{t('error:Something went wrong..')}</h2>
+      <Button variant="contained" onClick={handleGoBack}>
+        {t('button:go back')}
+      </Button>
     </ErrorPageBox>
   );
 };
