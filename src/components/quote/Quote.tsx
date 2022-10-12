@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import Loading from 'src/components/loading/Loading';
+
 const QuoteBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,7 +15,12 @@ interface QuoteProps {
 
 // TODO: button should be added
 const Quote: React.FC = () => {
-  return <QuoteBox>Quote Should Be added</QuoteBox>;
+  return (
+    <>
+      <Loading />
+      <QuoteBox>Quote Should Be added</QuoteBox>
+    </>
+  );
 };
 
 export default Quote;

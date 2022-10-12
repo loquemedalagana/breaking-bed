@@ -11,7 +11,7 @@ i18n
     resources,
     fallbackLng: 'en',
     debug: true,
-    ns: ['default', 'error', 'button'],
+    ns: ['default', 'status', 'error', 'button'],
     load: 'languageOnly',
     defaultNS: 'default',
     keySeparator: false, // we do not use keys in form messages.welcome

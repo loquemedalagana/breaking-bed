@@ -8,12 +8,16 @@ import useCharacterDetailController from 'src/controllers/useCharacterDetailCont
 const CharacterDetailPage: React.FC = () => {
   const params = useParams();
 
-  const { characterDetailState, fetchCharacterDetail } = useCharacterDetailController();
+  const { characterDetailState, fetchCharacterDetail, goOutFromThePage } = useCharacterDetailController();
 
   useEffect(() => {
     if (params.characterId) {
       fetchCharacterDetail(params.characterId);
     }
+
+    return () => {
+      goOutFromThePage();
+    };
   }, []);
 
   if (characterDetailState.data) {
