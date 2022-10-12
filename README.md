@@ -15,3 +15,20 @@ yarn test
 # how to build
 yarn build
 ```
+
+## Routes
+
+```/```
+- to show character list
+
+
+```/:characterId```
+- to show character detail and a famous phrase
+
+## Used Libraries
+
+1. [immer](https://immerjs.github.io/immer/)
+2. [axios](https://axios-http.com/es/docs/intro)
+3. [dayjs](https://day.js.org/docs/en/display/calendar-time)
+4. [i18n](https://react.i18next.com/guides/quick-start)
+5. [material UI](https://mui.com/material-ui/getting-started/overview/)
