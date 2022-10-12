@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
@@ -11,11 +12,13 @@ const ErrorPageBox = styled.section`
 `;
 
 const Error: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <ErrorPageBox>
       <h1>Error..</h1>
       <h2>Error code will be here</h2>
-      <Button variant="contained">go back</Button>
+      <Button variant="contained">{t('button:go back')}</Button>
     </ErrorPageBox>
   );
 };

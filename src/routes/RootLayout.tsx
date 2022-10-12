@@ -58,8 +58,8 @@ const RootLayout: React.FC<LayoutRouteProps> = () => {
         <Body>
           <Outlet />
         </Body>
-        <Footer />
       </LayoutBox>
+      <Footer />
     </RootLayoutWrapper>
   );
 };
