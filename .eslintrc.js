@@ -29,6 +29,7 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/semi': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
     camelcase: 'warn',
     semi: 0,
     'prefer-destructuring': [

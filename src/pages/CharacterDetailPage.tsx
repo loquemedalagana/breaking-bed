@@ -1,20 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import CharacterDetail from 'src/components/character_detail/CharacterDetail';
+import Loading from 'src/components/loading/Loading';
+import useCharacterDetailController from 'src/controllers/useCharacterDetailController';
 
 const CharacterDetailPage: React.FC = () => {
   const params = useParams();
-  const [characterId, setCharacterId] = useState<string>('');
+
+  const { characterDetailState, fetchCharacterDetail } = useCharacterDetailController();
 
   useEffect(() => {
     if (params.characterId) {
-      setCharacterId(params.characterId);
+      fetchCharacterDetail(params.characterId);
     }
   }, []);
 
-  // TODO: get character detail data from ID
-  return <CharacterDetail characterId={characterId} />;
+  if (characterDetailState.data) {
+    return <CharacterDetail characterInfo={characterDetailState.data} />;
+  }
+
+  if (characterDetailState.error) {
+    return <>error...</>;
+  }
+
+  return <Loading isPageLoading={true} />;
 };
 
 export default CharacterDetailPage;

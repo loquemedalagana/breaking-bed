@@ -6,6 +6,8 @@ import { HEADER_HEIGHT } from 'src/components/header/constants';
 import { URL_CHARACTERS } from 'src/routes/routeURL';
 
 const HeaderBox = styled.header`
+  left: 0;
+  top: 0;
   height: ${HEADER_HEIGHT}px;
   display: flex;
   width: 100%;
