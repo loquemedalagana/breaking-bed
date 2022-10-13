@@ -19,23 +19,36 @@ const QuoteText = styled.p`
 
 const Quote: React.FC = () => {
   const { t } = useTranslation();
-  const randomQuote = useContext(RandomQuoteContext);
+  const randomQuoteStore = useContext(RandomQuoteContext);
 
-  if (randomQuote?.state.loading) {
+  const handleQuoteRefreshButtonClick = () => {
+    if (randomQuoteStore === null) return;
+    if (randomQuoteStore.state.data) {
+      randomQuoteStore.fetchCharacterRandomQuote(randomQuoteStore.state.data?.author);
+    }
+  };
+
+  if (randomQuoteStore?.state.loading) {
     return <Loading />;
   }
 
-  if (randomQuote?.state.data) {
+  if (randomQuoteStore?.state.data) {
     return (
       <QuoteBox>
-        <QuoteText>{randomQuote.state.data.quote}</QuoteText>
-        <Button variant="contained">{t('button:Load another quote')}</Button>
+        <QuoteText>{randomQuoteStore.state.data.quote}</QuoteText>
+        <Button
+          variant="contained"
+          onClick={handleQuoteRefreshButtonClick}
+          disabled={!!randomQuoteStore?.state?.loading}
+        >
+          {t('button:Load another quote')}
+        </Button>
       </QuoteBox>
     );
   }
 
-  if (randomQuote?.state.error) {
-    console.log(randomQuote.state.error);
+  if (randomQuoteStore?.state.error) {
+    console.log(randomQuoteStore.state.error);
     return <QuoteBox>an error occurred!!</QuoteBox>;
   }
 
