@@ -1,5 +1,3 @@
-import { useReducer, Dispatch } from 'react';
-
 import {
   CHARACTER_DETAIL_ERROR,
   CHARACTER_DETAIL_LOADING,
@@ -46,22 +44,4 @@ export const characterDetailReducer = (
   }
 };
 
-export interface CharacterDetailReducer {
-  state: CharacterDetailState;
-  dispatch: Dispatch<CharacterDetailActionType>;
-}
-
-const useCharacterDetailReducer = (): CharacterDetailReducer => {
-  const [state, dispatch] = useReducer(characterDetailReducer, {
-    loading: false,
-    data: null,
-    error: null,
-  });
-
-  return {
-    state,
-    dispatch,
-  };
-};
-
-export default useCharacterDetailReducer;
+export default characterDetailReducer;

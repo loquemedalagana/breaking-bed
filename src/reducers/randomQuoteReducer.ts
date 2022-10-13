@@ -1,8 +1,6 @@
-import { Dispatch, useReducer } from 'react';
-
 import {
-  RANDOM_QUOTE_INIT,
   RANDOM_QUOTE_ERROR,
+  RANDOM_QUOTE_INIT,
   RANDOM_QUOTE_LOADING,
   RANDOM_QUOTE_SUCCESS,
   RandomQuoteActionType,
@@ -50,22 +48,4 @@ export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteA
   }
 };
 
-export interface RandomQuoteReducer {
-  state: RandomQuoteState;
-  dispatch: Dispatch<RandomQuoteActionType>;
-}
-
-const useRandomQuoteReducer = (): RandomQuoteReducer => {
-  const [state, dispatch] = useReducer(randomQuoteReducer, {
-    loading: false,
-    data: null,
-    error: null,
-  });
-
-  return {
-    state,
-    dispatch,
-  };
-};
-
-export default useRandomQuoteReducer;
+export default randomQuoteReducer;

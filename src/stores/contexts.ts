@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
-import { CharacterDetailReducer } from 'src/reducers/useCharacterDetailReducer';
-import { RandomQuoteReducer } from 'src/reducers/useCharacterRandomQuoteReducer';
+import { RandomQuoteStore } from 'src/stores/randomQuoteStore';
+import { CharacterDetailStore } from 'src/stores/characterDeatilStore';
 
-export const CharacterDetailContext = createContext<CharacterDetailReducer | null>(null);
-export const RandomQuoteContext = createContext<RandomQuoteReducer | null>(null);
+export const CharacterDetailContext = createContext<CharacterDetailStore | null>(null);
+export const RandomQuoteContext = createContext<RandomQuoteStore | null>(null);
