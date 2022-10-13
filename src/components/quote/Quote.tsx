@@ -21,7 +21,7 @@ const Quote: React.FC = () => {
   const { t } = useTranslation();
   const randomQuoteStore = useContext(RandomQuoteContext);
 
-  const handleQuoteRefreshButtonClick = () => {
+  const handleQuoteRefreshButtonClick = (): void => {
     if (randomQuoteStore === null) return;
     if (randomQuoteStore.state.data) {
       randomQuoteStore.fetchCharacterRandomQuote(randomQuoteStore.state.data?.author);

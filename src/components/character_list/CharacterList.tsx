@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import Loading from 'src/components/loading/Loading';
+import Character from 'src/models/Character';
 
 const CharacterListPageBox = styled.section`
   display: grid;
@@ -12,7 +13,7 @@ const CharacterListPageBox = styled.section`
 `;
 
 interface CharacterListProps {
-  // TODO: character list array
+  characterList?: Character[];
 }
 
 const CharacterList: React.FC<CharacterListProps> = () => {

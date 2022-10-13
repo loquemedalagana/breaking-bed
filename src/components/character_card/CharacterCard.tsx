@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 // import { CardActionArea } from '@mui/material';
 
 import Character from 'src/models/Character';
-import { DEVICE_MOBILE_WIDTH, DEVICE_DESKTOP_WIDTH } from 'src/device/devices';
+import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 
 const CardBox = styled(MuiCard)`
   display: flex;
