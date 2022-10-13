@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import { CHARACTER_DETAIL_ERROR, CHARACTER_DETAIL_SUCCESS } from 'src/actions/types';
-import useRestApiCharacterDetail from 'src/http/useRestApiCharacterDetail';
+import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
 import { characterDetailReducer, CharacterDetailState } from 'src/reducers/characterDetailReducer';
 
 export interface CharacterDetailStore {
@@ -17,9 +17,8 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
   });
 
   const fetchCharacterDetail = async (characterId: string): Promise<void> => {
-    const restApiCharacterDetail = useRestApiCharacterDetail();
     try {
-      const data = await restApiCharacterDetail.getCharacterDetailById(characterId);
+      const data = await restApiCharacterDetail(characterId);
       dispatch({ type: CHARACTER_DETAIL_SUCCESS, data });
     } catch (e) {
       dispatch({ type: CHARACTER_DETAIL_ERROR, error: e });
