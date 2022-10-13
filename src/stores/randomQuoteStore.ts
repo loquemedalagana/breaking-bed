@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import { RANDOM_QUOTE_ERROR, RANDOM_QUOTE_SUCCESS } from 'src/actions/types';
-import useRestApiCharacterDetail from 'src/http/useRestApiCharacterDetail';
+import restApiRandomQuote from 'src/http/restApiRandomQuote';
 import { randomQuoteReducer, RandomQuoteState } from 'src/reducers/randomQuoteReducer';
 
 export interface RandomQuoteStore {
@@ -15,11 +15,9 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     data: null,
     error: null,
   });
-  const restApiCharacterDetail = useRestApiCharacterDetail();
-
   const fetchCharacterRandomQuote = async (characterName: string): Promise<void> => {
     try {
-      const data = await restApiCharacterDetail.getRandomQuoteByCharacterName(characterName);
+      const data = await restApiRandomQuote(characterName);
       dispatch({ type: RANDOM_QUOTE_SUCCESS, data });
     } catch (e) {
       console.log(e);
