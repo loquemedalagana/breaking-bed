@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as dayjs from 'dayjs';
 import calender from 'dayjs/plugin/calendar';
@@ -10,12 +11,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
-// TODO: this will be used in the list
-// import { CardActionArea } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 
 import Character from 'src/models/Character';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
+import { URL_CHARACTER_DETAIL } from 'src/routes/routeURL';
 
 const CardBox = styled(MuiCard)`
   display: flex;
@@ -23,6 +23,8 @@ const CardBox = styled(MuiCard)`
   flex-direction: column;
   width: 100%;
 `;
+
+const CardButtonBox = styled(CardActionArea)``;
 
 const DetailPageCardBox = styled(CardBox)`
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
@@ -60,9 +62,38 @@ interface CharacterCardProps {
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   // TODO: es should be added
   dayjs.locale('en');
   dayjs.extend(calender);
+
+  const handleGotoDetail = (): void => {
+    navigate(`${URL_CHARACTER_DETAIL}/${character.characterId}`);
+  };
+
+  if (isListItem) {
+    return (
+      <DetailPageCardBox>
+        <CardButtonBox onClick={handleGotoDetail}>
+          <CardImage src={character.img} alt={character.name} />
+          <CharacterInfo>
+            <Typography gutterBottom align="center" variant="h5" component="div">
+              {character.name}
+            </Typography>
+            <Table size="small">
+              <TableBody>
+                <TableRow>
+                  <TableCell>{t('status')}</TableCell>
+                  <TableCell align="right">{character.status}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CharacterInfo>
+        </CardButtonBox>
+      </DetailPageCardBox>
+    );
+  }
 
   return (
     <DetailPageCardBox>
