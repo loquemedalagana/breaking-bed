@@ -1,9 +1,9 @@
-import { configureStore, createAction, createSlice } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
 import characterListSaga from 'src/actions/characterListSaga';
-import { CHARACTER_LIST_ERROR, CHARACTER_LIST_LOADING, CHARACTER_LIST_SUCCESS } from 'src/actions/types';
 import Character from 'src/models/Character';
+import { characterListError, characterListLoading, characterListSuccess } from 'src/actions/characterListActions';
 
 export interface CharacterListState {
   page: number;
@@ -21,10 +21,6 @@ export const initialState: CharacterListState = {
 };
 
 export const CHARACTER_COUNT_PER_PAGE = 4;
-
-export const characterListLoading = createAction<CharacterListState>(CHARACTER_LIST_LOADING);
-export const characterListSuccess = createAction<CharacterListState>(CHARACTER_LIST_SUCCESS);
-export const characterListError = createAction<CharacterListState>(CHARACTER_LIST_ERROR);
 
 const characterListSlice = createSlice({
   name: 'character-list',
@@ -50,6 +46,7 @@ const characterListSlice = createSlice({
       .addCase(characterListError, (state, action) => {
         return {
           ...state,
+          loading: false,
           error: action.payload.error,
         };
       })

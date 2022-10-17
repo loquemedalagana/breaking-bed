@@ -7,6 +7,7 @@ import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH } from 'src/device/devices';
 import Character from 'src/models/Character';
 
 const CharacterListPageBox = styled.section`
+  margin: 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;

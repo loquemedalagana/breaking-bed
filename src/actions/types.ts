@@ -1,6 +1,7 @@
 import Character from 'src/models/Character';
 import Quote from 'src/models/Quote';
 
+export const FETCH_CHARACTER_LIST_SAGA = 'FETCH_CHARACTER_LIST_SAGA'
 export const CHARACTER_LIST_LOADING = 'CHARACTER_LIST__LOADING';
 export const CHARACTER_LIST_SUCCESS = 'CHARACTER_LIST__SUCCESS';
 export const CHARACTER_LIST_ERROR = 'CHARACTER_LIST__ERROR';

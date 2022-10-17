@@ -15,7 +15,7 @@ import { CardActionArea } from '@mui/material';
 
 import Character from 'src/models/Character';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
-import { URL_CHARACTER_DETAIL } from 'src/routes/routeURL';
+import { URL_CHARACTERS } from 'src/routes/routeURL';
 
 const CardBox = styled(MuiCard)`
   display: flex;
@@ -24,7 +24,17 @@ const CardBox = styled(MuiCard)`
   width: 100%;
 `;
 
-const CardButtonBox = styled(CardActionArea)``;
+const CardButtonBox = styled(CardActionArea)`
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+
+  @media screen and (max-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
+    padding: 2rem;
+  }
+`;
+
+const ListPageCardBox = styled(CardBox)``;
 
 const DetailPageCardBox = styled(CardBox)`
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
@@ -44,6 +54,7 @@ const CharacterInfo = styled(CardContent)`
 `;
 
 const CardImage = styled.img`
+  max-width: 80%;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
     max-width: 50%;
   }
@@ -69,12 +80,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
   dayjs.extend(calender);
 
   const handleGotoDetail = (): void => {
-    navigate(`${URL_CHARACTER_DETAIL}/${character.characterId}`);
+    navigate(`${URL_CHARACTERS}/${character.characterId}`);
   };
 
   if (isListItem) {
     return (
-      <DetailPageCardBox>
+      <ListPageCardBox>
         <CardButtonBox onClick={handleGotoDetail}>
           <CardImage src={character.img} alt={character.name} />
           <CharacterInfo>
@@ -91,7 +102,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
             </Table>
           </CharacterInfo>
         </CardButtonBox>
-      </DetailPageCardBox>
+      </ListPageCardBox>
     );
   }
 
