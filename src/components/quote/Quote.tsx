@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
+import ErrorMessage from 'src/components/error/Error';
 import Loading from 'src/components/loading/Loading';
 import { RandomQuoteContext } from 'src/stores/contexts';
 
@@ -28,10 +29,6 @@ const Quote: React.FC = () => {
     }
   };
 
-  if (randomQuoteStore?.state.loading) {
-    return <Loading />;
-  }
-
   if (randomQuoteStore?.state.data) {
     return (
       <QuoteBox>
@@ -48,11 +45,14 @@ const Quote: React.FC = () => {
   }
 
   if (randomQuoteStore?.state.error) {
-    console.log(randomQuoteStore.state.error);
-    return <QuoteBox>an error occurred!!</QuoteBox>;
+    return (
+      <QuoteBox>
+        <ErrorMessage errorMessage={t('error:An error occurred when loading quote')} />
+      </QuoteBox>
+    );
   }
 
-  return <></>;
+  return <Loading />;
 };
 
 export default Quote;

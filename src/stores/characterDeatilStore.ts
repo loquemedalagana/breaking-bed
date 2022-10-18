@@ -1,6 +1,8 @@
 import { useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
+  CHARACTER_DETAIL_INIT,
   CHARACTER_DETAIL_ERROR,
   CHARACTER_DETAIL_LOADING,
   CHARACTER_DETAIL_SUCCESS,
@@ -19,6 +21,8 @@ export const characterDetailReducer = (
   state: CharacterDetailState,
   action: CharacterDetailActionType,
 ): CharacterDetailState => {
+  const { t } = useTranslation();
+
   switch (action.type) {
     case CHARACTER_DETAIL_LOADING:
       return {
@@ -36,13 +40,19 @@ export const characterDetailReducer = (
       return {
         loading: false,
         data: null,
-        error: action.error,
+        error: new Error(t('error:An error occurred when loading character detail')),
+      };
+    case CHARACTER_DETAIL_INIT:
+      return {
+        loading: false,
+        data: null,
+        error: null,
       };
     default:
       return {
         loading: false,
         data: null,
-        error: new Error('Unhandled action type'),
+        error: new Error(t('error:Unhandled action type')),
       };
   }
 };
@@ -50,6 +60,7 @@ export const characterDetailReducer = (
 export interface CharacterDetailStore {
   state: CharacterDetailState;
   fetchCharacterDetail: (characterId: string) => Promise<void>;
+  resetCharacterDetail: () => void;
 }
 
 const useCharacterDetailStore = (): CharacterDetailStore => {
@@ -68,9 +79,14 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
     }
   };
 
+  const resetCharacterDetail = (): void => {
+    dispatch({ type: CHARACTER_DETAIL_INIT });
+  };
+
   return {
     state,
     fetchCharacterDetail,
+    resetCharacterDetail,
   };
 };
 

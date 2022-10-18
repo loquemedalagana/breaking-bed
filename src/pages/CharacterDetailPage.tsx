@@ -19,9 +19,10 @@ const CharacterDetailPage: React.FC = () => {
     }
 
     return () => {
-      // TODO: cleanup function
+      characterDetailStore?.resetCharacterDetail();
+      randomQuoteStore?.resetCharacterRandomQuote();
     };
-  }, [characterDetailStore?.state?.data]);
+  }, []);
 
   if (characterDetailStore?.state?.data) {
     return <CharacterDetail characterInfo={characterDetailStore?.state.data} />;

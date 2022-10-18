@@ -12,7 +12,12 @@ const ErrorPageBox = styled.section`
   justify-content: space-evenly;
 `;
 
-const Error: React.FC = () => {
+interface ErrorProps {
+  isErrorPage?: boolean;
+  errorMessage?: string;
+}
+
+const Error: React.FC<ErrorProps> = ({isErrorPage, errorMessage}) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -20,14 +25,16 @@ const Error: React.FC = () => {
     navigate(-1);
   };
 
-  return (
+  return isErrorPage ? (
     <ErrorPageBox>
-      <h1>Error..</h1>
+      <h1>{t('error:Error..')}</h1>
       <h2>{t('error:Something went wrong..')}</h2>
       <Button variant="contained" onClick={handleGoBack}>
         {t('button:go back')}
       </Button>
     </ErrorPageBox>
+  ) : (
+    <div>{errorMessage}</div>
   );
 };
 

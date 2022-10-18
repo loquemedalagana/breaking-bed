@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   RANDOM_QUOTE_ERROR,
@@ -16,12 +17,8 @@ export interface RandomQuoteState {
   error: Error | null | unknown;
 }
 
-export interface RandomQuoteStore {
-  state: RandomQuoteState;
-  fetchCharacterRandomQuote: (characterName: string) => Promise<void>;
-}
-
 export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteActionType): RandomQuoteState => {
+  const { t } = useTranslation();
   switch (action.type) {
     case RANDOM_QUOTE_INIT:
       return {
@@ -45,16 +42,22 @@ export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteA
       return {
         loading: false,
         data: null,
-        error: action.error,
+        error: new Error(t('error:An error occurred when loading quote')),
       };
     default:
       return {
         loading: false,
         data: null,
-        error: new Error('Unhandled action type'),
+        error: new Error(t('error:Unhandled action type')),
       };
   }
 };
+
+export interface RandomQuoteStore {
+  state: RandomQuoteState;
+  fetchCharacterRandomQuote: (characterName: string) => Promise<void>;
+  resetCharacterRandomQuote: () => void;
+}
 
 const useRandomQuoteStore = (): RandomQuoteStore => {
   const [state, dispatch] = useReducer(randomQuoteReducer, {
@@ -62,6 +65,7 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     data: null,
     error: null,
   });
+
   const fetchCharacterRandomQuote = async (characterName: string): Promise<void> => {
     try {
       const data = await restApiRandomQuote(characterName);
@@ -72,9 +76,14 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     }
   };
 
+  const resetCharacterRandomQuote = (): void => {
+    dispatch({ type: RANDOM_QUOTE_INIT });
+  };
+
   return {
     state,
     fetchCharacterRandomQuote,
+    resetCharacterRandomQuote,
   };
 };
 export default useRandomQuoteStore;
