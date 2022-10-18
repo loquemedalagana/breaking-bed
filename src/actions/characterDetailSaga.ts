@@ -1,20 +1,42 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { CharacterDetailState } from 'src/stores/characterDetailStore';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
-import { CHARACTER_DETAIL_SUCCESS, CHARACTER_DETAIL_ERROR } from 'src/actions/types';
 
+import { CHARACTER_DETAIL_SUCCESS, CHARACTER_DETAIL_ERROR, CHARACTER_DETAIL_LOADING } from 'src/actions/types';
+import { AppState } from 'src/stores/appStore';
+import { CharacterListState } from 'src/stores/characterListStore';
+import Character from 'src/models/Character';
+import { BrowserHistory } from 'history';
 
-export function* fetchCharacterDetail(): Generator {
+function* fetchCharacterDetail(characterId: string): Generator {
   try {
-    console.log(window.history);
+    const fetchedCharacterDetailData = yield call(restApiCharacterDetail, characterId);
+    yield put({
+      type: CHARACTER_DETAIL_SUCCESS,
+      payload: fetchedCharacterDetailData,
+    });
   } catch (e) {
     yield put({
       type: CHARACTER_DETAIL_ERROR,
       payload: {
-        error: new Error('An error occurred when loading character detail'),
+        error: JSON.stringify(e),
       },
     });
   }
 }
 
-export default fetchCharacterDetail;
+function* getCharacterDetailInfo(): Generator {
+  const characterListCurrentState = (yield select((state: AppState) => state.characterList)) as CharacterListState;
+
+  if (characterListCurrentState.data) {
+    const filteredData = (yield characterListCurrentState.data.filter(data => data.characterId)) as Character[];
+    yield put({
+      type: CHARACTER_DETAIL_SUCCESS,
+      payload: filteredData[0],
+    });
+  }
+}
+
+export default function* characterDetailRootSaga(): Generator {
+  yield takeEvery(CHARACTER_DETAIL_LOADING, getCharacterDetailInfo);
+}

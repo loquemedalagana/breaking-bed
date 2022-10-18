@@ -15,6 +15,7 @@ export function* fetchCharacterList(): Generator {
         type: CHARACTER_LIST_SUCCESS,
         payload: {
           data: characterList,
+          page: page + 1,
         },
       });
     }
@@ -22,7 +23,7 @@ export function* fetchCharacterList(): Generator {
     yield put({
       type: CHARACTER_LIST_ERROR,
       payload: {
-        error: new Error((e as any).message as string),
+        error: JSON.stringify(e),
       },
     });
   }

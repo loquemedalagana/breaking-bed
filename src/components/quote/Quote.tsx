@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
 import ErrorMessage from 'src/components/error/Error';
 import Loading from 'src/components/loading/Loading';
+import { RandomQuoteContext } from 'src/stores/contexts';
 
 const QuoteBox = styled.div`
   display: flex;
@@ -19,7 +20,8 @@ const QuoteText = styled.p`
 
 const Quote: React.FC = () => {
   const { t } = useTranslation();
-/*
+  const randomQuoteStore = useContext(RandomQuoteContext);
+
   const handleQuoteRefreshButtonClick = (): void => {
     if (randomQuoteStore === null) return;
     if (randomQuoteStore.state.data) {
@@ -50,8 +52,6 @@ const Quote: React.FC = () => {
     );
   }
 
-
- */
   return <Loading />;
 };
 

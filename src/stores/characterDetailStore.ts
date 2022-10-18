@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useTranslation } from 'react-i18next';
+import { Params } from 'react-router-dom';
 
 import {
   characterDetailInit,
   characterDetailLoading,
   characterDetailError,
-  characterDetailSuccess,
-} from 'src/actions/characterDetailActions';
+  characterDetailSuccess
+} from "src/actions/characterDetailActions";
 import Character from 'src/models/Character';
 import { AppState } from 'src/stores/appStore';
 
 export interface CharacterDetailState {
   loading: boolean;
   data: Character | null;
-  error: Error | null | unknown;
+  error: string | null;
 }
 
 const initialState: CharacterDetailState = {
@@ -27,31 +28,22 @@ const characterDetailSlice = createSlice<CharacterDetailState, {}, 'character-de
   initialState,
   reducers: {},
   extraReducers: builder => {
-    const { t } = useTranslation();
     builder
       .addCase(characterDetailInit, state => {
         return initialState;
       })
-      .addCase(characterDetailLoading, state => {
+      .addCase(characterDetailLoading, (state) => {
         return {
           ...state,
           loading: true,
-        };
+        }
       })
       .addCase(characterDetailSuccess, (state, action) => {
         return {
           ...state,
           loading: false,
-          data: action.payload.data as Character,
-          error: null,
-        };
-      })
-      .addCase(characterDetailError, state => {
-        return {
-          loading: false,
-          data: null,
-          error: new Error(t('error:An error occurred when loading character detail')),
-        };
+          data: action.payload.data,
+        }
       })
       .addDefaultCase(state => {
         return state;
@@ -59,6 +51,6 @@ const characterDetailSlice = createSlice<CharacterDetailState, {}, 'character-de
   },
 });
 
-// export const selectCharacterDetailState = (state: AppState): CharacterDetailState => state.characterDetail;
+export const selectCharacterDetailState = (state: AppState): CharacterDetailState => state.characterDetail;
 
 export default characterDetailSlice.reducer;

@@ -3,7 +3,8 @@ import { debounce } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
-import { CHARACTER_LIST_LOADING } from 'src/actions/types';
+import { CHARACTER_DETAIL_INIT, CHARACTER_LIST_LOADING } from "src/actions/types";
+import Loading from 'src/components/loading/Loading';
 import CharacterList from 'src/components/character_list/CharacterList';
 import { selectCharacterListState } from 'src/stores/characterListStore';
 
@@ -20,7 +21,15 @@ const CharacterListPage: React.FC = () => {
     [inView],
   );
 
+  useEffect(() => {
+    dispatch({type: CHARACTER_DETAIL_INIT});
+  }, []);
+
   useEffect(fetchMoreData);
+
+  if (!characterListState.error && !characterListState.data) {
+    return <Loading isPageLoading={true} />;
+  }
 
   return (
     <CharacterList

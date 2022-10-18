@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import Character from 'src/models/Character';
-import { characterListError, characterListLoading, characterListSuccess } from 'src/actions/characterListActions';
-import { AppState } from 'src/stores/appStore';
+import Character from "src/models/Character";
+import { characterListError, characterListLoading, characterListSuccess } from "src/actions/characterListActions";
+import { AppState } from "src/stores/appStore";
 
 export interface CharacterListState {
   page: number;
   data: Character[];
   loading: boolean;
-  error: Error | null | unknown;
+  error: string | null;
   isReachedEnd: boolean;
 }
 export const initialState: CharacterListState = {
@@ -18,8 +18,6 @@ export const initialState: CharacterListState = {
   loading: false,
   isReachedEnd: false,
 };
-
-export const CHARACTER_COUNT_PER_PAGE = 4;
 
 const characterListSlice = createSlice({
   name: 'character-list',
