@@ -60,7 +60,8 @@ const sagaMiddleWare = createSagaMiddleware();
 
 const characterListStore = configureStore({
   reducer: characterListSlice.reducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware({ thunk: false }).prepend(sagaMiddleWare),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ thunk: false, serializableCheck: false }).prepend(sagaMiddleWare),
 });
 
 export type CharacterListRootState = ReturnType<typeof characterListStore.getState>;

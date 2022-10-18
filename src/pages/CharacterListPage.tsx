@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { debounce } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
-import { CHARACTER_LIST_LOADING, FETCH_CHARACTER_LIST_SAGA } from "src/actions/types";
+import { CHARACTER_LIST_LOADING } from 'src/actions/types';
 import CharacterList from 'src/components/character_list/CharacterList';
 import { selectCharacterListState } from 'src/stores/characterListStore';
 
@@ -11,14 +12,15 @@ const CharacterListPage: React.FC = () => {
   const characterListState = useSelector(selectCharacterListState);
   const [bottomRef, inView] = useInView({});
 
-  useEffect(() => {
-    // TODO: fetch function should be called
-    console.log('in bottom');
-  }, [inView]);
+  const fetchMoreData = useCallback(
+    debounce(() => {
+      if (!inView) return;
+      dispatch({ type: CHARACTER_LIST_LOADING });
+    }, 2500),
+    [inView],
+  );
 
-  useEffect(() => {
-    dispatch({ type: CHARACTER_LIST_LOADING });
-  }, []);
+  useEffect(fetchMoreData);
 
   return (
     <CharacterList
