@@ -1,10 +1,10 @@
-import { call, takeEvery, put, select } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
+import { CharacterListState } from 'src/stores/characterListStore';
 import restApiCharacterList from 'src/http/restApiCharacterList';
 import { CHARACTER_LIST_ERROR, CHARACTER_LIST_LOADING, CHARACTER_LIST_SUCCESS } from 'src/actions/types';
-import { CharacterListState } from 'src/stores/characterListStore';
 
-function* fetchCharacterList(): Generator {
+export function* fetchCharacterList(): Generator {
   try {
     const characterListCurrentState = (yield select(state => state)) as CharacterListState;
     const { page, isReachedEnd } = characterListCurrentState;
@@ -28,6 +28,6 @@ function* fetchCharacterList(): Generator {
   }
 }
 
-export default function* rootSaga(): Generator {
+export default function* characterListRootSaga(): Generator {
   yield takeEvery(CHARACTER_LIST_LOADING, fetchCharacterList);
 }

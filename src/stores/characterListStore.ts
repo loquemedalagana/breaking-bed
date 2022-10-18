@@ -1,9 +1,8 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+import { createSlice } from '@reduxjs/toolkit';
 
-import characterListSaga from 'src/actions/characterListSaga';
 import Character from 'src/models/Character';
 import { characterListError, characterListLoading, characterListSuccess } from 'src/actions/characterListActions';
+import { AppState } from 'src/stores/appStore';
 
 export interface CharacterListState {
   page: number;
@@ -56,21 +55,6 @@ const characterListSlice = createSlice({
   },
 });
 
-const sagaMiddleWare = createSagaMiddleware();
+export const selectCharacterListState = (state: AppState): CharacterListState => state.characterList;
 
-const characterListStore = configureStore({
-  reducer: characterListSlice.reducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ thunk: false, serializableCheck: false }).prepend(sagaMiddleWare),
-});
-
-export type CharacterListRootState = ReturnType<typeof characterListStore.getState>;
-export type CharacterListDispatch = typeof characterListStore.dispatch;
-
-export const selectCharacterListState = (state: CharacterListRootState): CharacterListState => {
-  return state;
-};
-
-sagaMiddleWare.run(characterListSaga);
-
-export default characterListStore;
+export default characterListSlice.reducer;

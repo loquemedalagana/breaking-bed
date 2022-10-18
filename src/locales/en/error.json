@@ -1,3 +1,7 @@
 {
-  "Something went wrong..": "Something went wrong.."
+  "Something went wrong..": "Something went wrong..",
+  "Error..": "Error..",
+  "An error occurred when loading quote": "An error occurred when loading quote",
+  "An error occurred when loading character detail": "An error occurred when loading character detail",
+  "Unhandled action type": "Unhandled action type"
 }

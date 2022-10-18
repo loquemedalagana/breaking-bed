@@ -22,7 +22,7 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({ characterInfo }) => {
     <div className="layout-space">
       <CharacterDetailBox>
         <CharacterCard character={characterInfo} />
-        <Quote />
+        {/*         <Quote /> */}
       </CharacterDetailBox>
     </div>
   );

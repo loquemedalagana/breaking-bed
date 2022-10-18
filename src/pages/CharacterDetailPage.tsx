@@ -1,16 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import CharacterDetail from 'src/components/character_detail/CharacterDetail';
 import Loading from 'src/components/loading/Loading';
 import ErrorPage from 'src/pages/ErrorPage';
-import { CharacterDetailContext, RandomQuoteContext } from 'src/stores/contexts';
 
 const CharacterDetailPage: React.FC = () => {
   const params = useParams();
-  const characterDetailStore = useContext(CharacterDetailContext);
-  const randomQuoteStore = useContext(RandomQuoteContext);
-
+/*
   useEffect(() => {
     if (params.characterId && characterDetailStore?.state?.data === null) {
       characterDetailStore?.fetchCharacterDetail(params.characterId);
@@ -31,7 +28,7 @@ const CharacterDetailPage: React.FC = () => {
   if (characterDetailStore?.state?.error) {
     return <ErrorPage />;
   }
-
+*/
   return <Loading isPageLoading={true} />;
 };
 
