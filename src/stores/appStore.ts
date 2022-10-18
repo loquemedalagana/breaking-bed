@@ -1,25 +1,36 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+import { createSlice } from '@reduxjs/toolkit';
 
-import sagas from 'src/actions/sagas';
-import characterListReducer from 'src/stores/characterListStore';
-import characterDetailReducer from 'src/stores/characterDetailStore';
+import { routeChange } from 'src/actions/appActions';
+import { RootState } from 'src/stores/rootStore';
 
-const appReducer = combineReducers({
-  characterList: characterListReducer,
-  characterDetail: characterDetailReducer,
+export interface AppState {
+  path: string;
+}
+
+const initialState: AppState = {
+  path: '/',
+};
+
+const appSlice = createSlice<AppState, {}, 'app'>({
+  name: 'app',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(routeChange, (state, action) => {
+        return {
+          ...state,
+          path: action.payload.path,
+        };
+      })
+      .addDefaultCase(state => {
+        return {
+          ...state,
+        };
+      });
+  },
 });
 
-const sagaMiddleWare = createSagaMiddleware();
+export const selectAppState = (state: RootState): AppState => state.app;
 
-const appStore = configureStore({
-  reducer: appReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ thunk: false, serializableCheck: false }).prepend(sagaMiddleWare),
-});
-
-sagaMiddleWare.run(sagas);
-
-export default appStore;
-
-export type AppState = ReturnType<typeof appStore.getState>;
+export default appSlice.reducer;

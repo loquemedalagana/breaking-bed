@@ -3,7 +3,7 @@ import { CharacterDetailState } from 'src/stores/characterDetailStore';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
 
 import { CHARACTER_DETAIL_SUCCESS, CHARACTER_DETAIL_ERROR, CHARACTER_DETAIL_LOADING } from 'src/actions/types';
-import { AppState } from 'src/stores/appStore';
+import { RootState } from 'src/stores/rootStore';
 import { CharacterListState } from 'src/stores/characterListStore';
 import Character from 'src/models/Character';
 import { BrowserHistory } from 'history';
@@ -26,7 +26,7 @@ function* fetchCharacterDetail(characterId: string): Generator {
 }
 
 function* getCharacterDetailInfo(): Generator {
-  const characterListCurrentState = (yield select((state: AppState) => state.characterList)) as CharacterListState;
+  const characterListCurrentState = (yield select((state: RootState) => state.characterList)) as CharacterListState;
 
   if (characterListCurrentState.data) {
     const filteredData = (yield characterListCurrentState.data.filter(data => data.characterId)) as Character[];

@@ -9,7 +9,7 @@ import {
   characterDetailSuccess
 } from "src/actions/characterDetailActions";
 import Character from 'src/models/Character';
-import { AppState } from 'src/stores/appStore';
+import { RootState } from 'src/stores/rootStore';
 
 export interface CharacterDetailState {
   loading: boolean;
@@ -51,6 +51,6 @@ const characterDetailSlice = createSlice<CharacterDetailState, {}, 'character-de
   },
 });
 
-export const selectCharacterDetailState = (state: AppState): CharacterDetailState => state.characterDetail;
+export const selectCharacterDetailState = (state: RootState): CharacterDetailState => state.characterDetail;
 
 export default characterDetailSlice.reducer;

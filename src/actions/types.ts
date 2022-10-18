@@ -1,5 +1,7 @@
 import Quote from 'src/models/Quote';
 
+export const CHANGE_ROUTE_PATH = 'APP__CHANGE_ROUTH_PATH';
+
 export const CHARACTER_LIST_LOADING = 'CHARACTER_LIST__LOADING';
 export const CHARACTER_LIST_SUCCESS = 'CHARACTER_LIST__SUCCESS';
 export const CHARACTER_LIST_ERROR = 'CHARACTER_LIST__ERROR';

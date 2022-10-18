@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import Character from "src/models/Character";
 import { characterListError, characterListLoading, characterListSuccess } from "src/actions/characterListActions";
-import { AppState } from "src/stores/appStore";
+import { RootState } from "src/stores/rootStore";
 
 export interface CharacterListState {
   page: number;
@@ -53,6 +53,6 @@ const characterListSlice = createSlice({
   },
 });
 
-export const selectCharacterListState = (state: AppState): CharacterListState => state.characterList;
+export const selectCharacterListState = (state: RootState): CharacterListState => state.characterList;
 
 export default characterListSlice.reducer;

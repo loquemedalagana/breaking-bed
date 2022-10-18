@@ -1,7 +1,9 @@
-import React from 'react';
-import { LayoutRouteProps, Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { LayoutRouteProps, Outlet, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from '@emotion/styled';
 
+import { CHANGE_ROUTE_PATH } from 'src/actions/types';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import { HEADER_HEIGHT } from 'src/components/header/constants';
 import Header from 'src/components/header/Header';
@@ -51,6 +53,15 @@ const Body = styled.main`
 `;
 
 const RootLayout: React.FC<LayoutRouteProps> = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+    // TODO: write dispatch function
+    dispatch({ type: CHANGE_ROUTE_PATH, payload: { path: location.pathname } });
+  }, [location.pathname]);
+
   return (
     <RootLayoutWrapper>
       <LayoutBox>
