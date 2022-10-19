@@ -14,14 +14,22 @@ const CharacterDetailPage: React.FC = () => {
   useEffect(() => {
     if (params.characterId && characterDetailStore?.state?.data === null) {
       characterDetailStore?.fetchCharacterDetail(params.characterId);
-    } else if (characterDetailStore?.state?.data) {
+    }
+
+    return () => {
+      characterDetailStore?.getInitCharacterDetailState();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (characterDetailStore?.state?.data) {
       randomQuoteStore?.fetchCharacterRandomQuote(characterDetailStore.state.data.name);
     }
 
     return () => {
-      // TODO: cleanup function
+      randomQuoteStore?.getInitQuoteState();
     };
-  }, [characterDetailStore?.state?.data]);
+  }, [characterDetailStore?.state.data]);
 
   if (characterDetailStore?.state?.data) {
     return <CharacterDetail characterInfo={characterDetailStore?.state.data} />;

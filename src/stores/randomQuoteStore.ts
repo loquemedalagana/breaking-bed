@@ -16,11 +16,6 @@ export interface RandomQuoteState {
   error: Error | null | unknown;
 }
 
-export interface RandomQuoteStore {
-  state: RandomQuoteState;
-  fetchCharacterRandomQuote: (characterName: string) => Promise<void>;
-}
-
 export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteActionType): RandomQuoteState => {
   switch (action.type) {
     case RANDOM_QUOTE_INIT:
@@ -56,6 +51,12 @@ export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteA
   }
 };
 
+export interface RandomQuoteStore {
+  state: RandomQuoteState;
+  fetchCharacterRandomQuote: (characterName: string) => Promise<void>;
+  getInitQuoteState: () => void;
+}
+
 const useRandomQuoteStore = (): RandomQuoteStore => {
   const [state, dispatch] = useReducer(randomQuoteReducer, {
     loading: false,
@@ -72,9 +73,14 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     }
   };
 
+  const getInitQuoteState = (): void => {
+    dispatch({ type: RANDOM_QUOTE_INIT });
+  };
+
   return {
     state,
     fetchCharacterRandomQuote,
+    getInitQuoteState,
   };
 };
 export default useRandomQuoteStore;

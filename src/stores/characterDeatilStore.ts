@@ -4,6 +4,7 @@ import {
   CHARACTER_DETAIL_ERROR,
   CHARACTER_DETAIL_LOADING,
   CHARACTER_DETAIL_SUCCESS,
+  CHARACTER_DETAIL_INIT,
   CharacterDetailActionType,
 } from 'src/actions/types';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
@@ -15,11 +16,19 @@ export interface CharacterDetailState {
   error: Error | null | unknown;
 }
 
+export const initialState: CharacterDetailState = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
 export const characterDetailReducer = (
   state: CharacterDetailState,
   action: CharacterDetailActionType,
 ): CharacterDetailState => {
   switch (action.type) {
+    case CHARACTER_DETAIL_INIT:
+      return initialState;
     case CHARACTER_DETAIL_LOADING:
       return {
         loading: true,
@@ -50,6 +59,7 @@ export const characterDetailReducer = (
 export interface CharacterDetailStore {
   state: CharacterDetailState;
   fetchCharacterDetail: (characterId: string) => Promise<void>;
+  getInitCharacterDetailState: () => void;
 }
 
 const useCharacterDetailStore = (): CharacterDetailStore => {
@@ -68,9 +78,14 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
     }
   };
 
+  const getInitCharacterDetailState = (): void => {
+    dispatch({ type: CHARACTER_DETAIL_INIT });
+  };
+
   return {
     state,
     fetchCharacterDetail,
+    getInitCharacterDetailState,
   };
 };
 
