@@ -23,21 +23,21 @@ yarn build
 
 - to show character list
 
-### state management - redux
-
 `/:characterId`
 
-- to show character detail and a famous phrase
+- to show character detail and famous quote
+
+### state management - redux and redux saga
+
+`Character List`
+- 
+
 
 ### state management - context API
+- These states are used in the Context API because of the compatibility with the current route params.
 
-## Used Libraries
+`Character Detail`
 
-1. [immer](https://immerjs.github.io/immer/)
-2. [axios](https://axios-http.com/es/docs/intro)
-3. [dayjs](https://day.js.org/docs/en/display/calendar-time)
-4. [i18n](https://react.i18next.com/guides/quick-start)
-5. [material UI](https://mui.com/material-ui/getting-started/overview/)
-6. [redux toolkit](https://redux.js.org/tutorials/fundamentals/part-8-modern-redux)
+`Quote`
 
-- As `createStore` was deprecated in the latest version, I've no choice but to use toolkit. Nevertheless, I know that `createStore` is used when converting combined reducers into a single store.
+### central state control libraries' comparison
