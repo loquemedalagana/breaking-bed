@@ -10,6 +10,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    lng: 'en',
     debug: true,
     ns: ['default', 'status', 'error', 'button'],
     load: 'languageOnly',

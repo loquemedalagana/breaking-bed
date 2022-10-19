@@ -1,8 +1,18 @@
 {
-  "nickname": "__NOT_TRANSLATED__",
-  "status": "__NOT_TRANSLATED__",
-  "birthday": "__NOT_TRANSLATED__",
-  "occupations": "__NOT_TRANSLATED__",
-  "portrayed": "__NOT_TRANSLATED__",
-  "appearance": "__NOT_TRANSLATED__"
+  "nickname": "apodo/a",
+  "status": "estado",
+  "birthday": "nacimiento",
+  "occupations": "ocupaciones",
+  "portrayed": "representado/a",
+  "appearance": "aparición",
+  "Load another quote": "Cargar otra frase",
+  "Something went wrong..": "Algo salió mal.",
+  "Go back": "Regresa",
+  "Please try again.": "Por favor, vuelva a intentarlo.",
+  "alive": "vivo/a",
+  "deceased": "fallecido/a",
+  "presumed dead": "presunto/a muerto/a",
+  "unknown": "desconocido/a",
+  "Loading": "Cargando",
+  "Source code is here": "El código fuente está aquí"
 }

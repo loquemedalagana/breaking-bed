@@ -41,7 +41,7 @@ const Quote: React.FC = () => {
           onClick={handleQuoteRefreshButtonClick}
           disabled={!!randomQuoteStore?.state?.loading}
         >
-          {t('button:Load another quote')}
+          {t('Load another quote')}
         </Button>
       </QuoteBox>
     );

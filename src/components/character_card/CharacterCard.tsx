@@ -54,6 +54,7 @@ const CharacterInfo = styled(CardContent)`
 `;
 
 const CardImage = styled.img`
+  align-self: center;
   max-width: 80%;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
     max-width: 50%;
@@ -61,6 +62,7 @@ const CardImage = styled.img`
 `;
 
 const Table = styled(MuiTable)`
+  align-self: center;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
     width: 100%;
   }
@@ -79,6 +81,19 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
   dayjs.locale('en');
   dayjs.extend(calender);
 
+  const getCharacterState = (state: string): string => {
+    switch (state) {
+      case 'alive':
+        return t('alive');
+      case 'deceased':
+        return t('deceased');
+      case 'presumed dead':
+        return t('presumed dead');
+      default:
+        return t('unknown');
+    }
+  };
+
   const handleGotoDetail = (): void => {
     navigate(`${URL_CHARACTERS}/${character.characterId}`);
   };
@@ -96,7 +111,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
               <TableBody>
                 <TableRow>
                   <TableCell>{t('status')}</TableCell>
-                  <TableCell align="right">{character.status}</TableCell>
+                  <TableCell align="right">{getCharacterState(character.status)}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -123,7 +138,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
             )}
             <TableRow>
               <TableCell>{t('status')}</TableCell>
-              <TableCell align="right">{character.status}</TableCell>
+              <TableCell align="right">{getCharacterState(character.status)}</TableCell>
             </TableRow>
             {character.birthday && (
               <TableRow>
