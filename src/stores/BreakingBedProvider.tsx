@@ -10,7 +10,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// Redux Provider should be added
 const BreakingBedProvider: React.FC<Props> = ({ children }) => {
   const characterDetailStore = useCharacterDetailStore();
   const randomQuoteStore = useRandomQuoteStore();

@@ -64,6 +64,7 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     error: null,
   });
   const fetchCharacterRandomQuote = async (characterName: string): Promise<void> => {
+    dispatch({ type: RANDOM_QUOTE_LOADING });
     try {
       const data = await restApiRandomQuote(characterName);
       dispatch({ type: RANDOM_QUOTE_SUCCESS, data });
