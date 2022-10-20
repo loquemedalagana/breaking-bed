@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as dayjs from 'dayjs';
 import calender from 'dayjs/plugin/calendar';
@@ -31,6 +31,15 @@ const CardButtonBox = styled(CardActionArea)`
 
   @media screen and (max-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
     padding: 2rem;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
   }
 `;
 
@@ -100,29 +109,31 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
 
   if (isListItem) {
     return (
-      <ListPageCardBox>
-        <CardButtonBox onClick={handleGotoDetail}>
-          <CardImage src={character.img} alt={character.name} />
-          <CharacterInfo>
-            <Typography gutterBottom align="center" variant="h5" component="div">
-              {character.name}
-            </Typography>
-            <Table size="small">
-              <TableBody>
-                <TableRow>
-                  <TableCell>{t('status')}</TableCell>
-                  <TableCell align="right">{getCharacterState(character.status)}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CharacterInfo>
-        </CardButtonBox>
+      <ListPageCardBox id={`character-list-item-${character.characterId}`}>
+        <StyledLink to={`${URL_CHARACTERS}/${character.characterId}`}>
+          <CardButtonBox onClick={handleGotoDetail} id={`goto-character-detail-${character.characterId}`}>
+            <CardImage src={character.img} alt={character.name} />
+            <CharacterInfo>
+              <Typography gutterBottom align="center" variant="h5" component="div">
+                {character.name}
+              </Typography>
+              <Table size="small">
+                <TableBody>
+                  <TableRow>
+                    <TableCell>{t('status')}</TableCell>
+                    <TableCell align="right">{getCharacterState(character.status)}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CharacterInfo>
+          </CardButtonBox>
+        </StyledLink>
       </ListPageCardBox>
     );
   }
 
   return (
-    <DetailPageCardBox>
+    <DetailPageCardBox id={`character-detail-${character.characterId}`}>
       <CardImage src={character.img} alt={character.name} />
       <CharacterInfo>
         <Typography gutterBottom align="center" variant="h5" component="div">

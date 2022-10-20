@@ -35,7 +35,7 @@ const Error: React.FC = () => {
   };
 
   return (
-    <ErrorPageBox>
+    <ErrorPageBox id="error-page">
       <ErrorContentBox>
         <h1>Error..</h1>
         <h2>{t('Something went wrong..')}</h2>

@@ -37,6 +37,7 @@ const Quote: React.FC = () => {
       <QuoteBox>
         <QuoteText>{randomQuoteStore.state.data.quote}</QuoteText>
         <Button
+          id="refresh-quote-button"
           variant="contained"
           onClick={handleQuoteRefreshButtonClick}
           disabled={!!randomQuoteStore?.state?.loading}

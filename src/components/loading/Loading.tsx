@@ -69,12 +69,12 @@ const Loading: React.FC<LoadingProps> = ({ isPageLoading }) => {
 
   if (isPageLoading) {
     return (
-      <LoadingPageBox>
+      <LoadingPageBox id="page-loading">
         <PageLoader>{t('Loading')}</PageLoader>
       </LoadingPageBox>
     );
   }
-  return <ItemLoader />;
+  return <ItemLoader id="item-loading" />;
 };
 
 export default Loading;
