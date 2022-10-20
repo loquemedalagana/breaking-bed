@@ -11,8 +11,8 @@ This repository is for the application where the details of the characters of th
 yarn start
 
 # how to e2e test
-yarn start
-yarn run cypress open
+## before the app should be started
+yarn cypress
 
 # how to functional test
 yarn test
