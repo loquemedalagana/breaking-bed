@@ -20,6 +20,8 @@ yarn test
 yarn build
 ```
 
+<hr />
+
 ## Routes
 
 `/`
@@ -30,10 +32,17 @@ yarn build
 
 - to show character detail and famous quote
 
-
+<hr/>
 
 ## Project Structure
 
+### UI
+
+### business logics
+
+### test
+
+<hr/>
 
 ## State Management
 
@@ -55,4 +64,3 @@ yarn build
 
 - 
 
-### central state control libraries' comparison
