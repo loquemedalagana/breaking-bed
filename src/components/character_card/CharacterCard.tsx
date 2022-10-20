@@ -103,15 +103,11 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
     }
   };
 
-  const handleGotoDetail = (): void => {
-    navigate(`${URL_CHARACTERS}/${character.characterId}`);
-  };
-
   if (isListItem) {
     return (
       <ListPageCardBox id={`character-list-item-${character.characterId}`}>
         <StyledLink to={`${URL_CHARACTERS}/${character.characterId}`}>
-          <CardButtonBox onClick={handleGotoDetail} id={`goto-character-detail-${character.characterId}`}>
+          <CardButtonBox id={`goto-character-detail-${character.characterId}`}>
             <CardImage src={character.img} alt={character.name} />
             <CharacterInfo>
               <Typography gutterBottom align="center" variant="h5" component="div">
