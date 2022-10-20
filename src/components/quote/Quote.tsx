@@ -55,7 +55,7 @@ const Quote: React.FC = () => {
     return <Error />;
   }
 
-  return <QuoteBox>{t('He or she does not have quote.')}</QuoteBox>;
+  return <QuoteBox id="quote-text-empty">{t('He or she does not have quote.')}</QuoteBox>;
 };
 
 export default Quote;

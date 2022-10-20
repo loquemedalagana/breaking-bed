@@ -43,10 +43,9 @@ describe('the character detail page is functioned correctly', () => {
       cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).its('response.statusCode').should('eq', 200);
       cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
         .its('response.body')
-        .should(data => {
-          if (data.length > 0) {
-            cy.get('#refresh-quote-button').click();
-          }
+        .should('not.be.null')
+        .then(() => {
+          cy.get('#refresh-quote-button').click();
         });
     });
 
@@ -54,16 +53,24 @@ describe('the character detail page is functioned correctly', () => {
       cy.get('#item-loading');
     });
 
-    it('to check if another quote is loaded correctly', () => {
+    it('to check if the loaded quote is by this character', () => {
       cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).its('response.statusCode').should('eq', 200);
       cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
         .its('response.body')
-        .should(data => {
+        .should('not.be.null')
+        .then(data => {
           if (data.length > 0) {
             expect(data[0].author).to.be.eq(mockedCharacterData.name);
-          } else {
-            // TODO: show that his or her quote doesn't exist
           }
+        });
+    });
+
+    it('to show the character without quote', () => {
+      cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
+        .its('response.body')
+        .should('be.null')
+        .then(() => {
+          cy.get('#quote-text-empty');
         });
     });
   });
