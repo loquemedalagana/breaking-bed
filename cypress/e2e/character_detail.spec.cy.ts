@@ -2,6 +2,7 @@ import characterList from '../../src/tests/mocks/characterList';
 import Character, { ServerCharacterData } from '../../src/models/Character';
 import { GET_CHARACTERS, GET_QUOTES } from './apiURLforTest';
 
+const CHARACTER_DETAIL_BAD_REQUEST = 'character-detail-bad-request';
 const CHARACTER_DETAIL_REQUEST = 'character-detail-request';
 const CHARACTER_QUOTE_REQUEST = 'character-quote-request';
 
@@ -27,9 +28,12 @@ describe('the character detail page is functioned correctly', () => {
 
   context('to load character info correctly', () => {
     it('to check loaded character info correctly', () => {
-      cy.wait(`@${CHARACTER_DETAIL_REQUEST}`).then(intersection => {
-        assert.isNotNull(intersection.response.body);
-      });
+      cy.wait(`@${CHARACTER_DETAIL_REQUEST}`).its('response.statusCode').should('eq', 200);
+      cy.get(`@${CHARACTER_DETAIL_REQUEST}`)
+        .its('response.body')
+        .should(data => {
+          expect(data[0].char_id).to.be.eq(randomCharacterId);
+        });
       cy.get(`#character-detail-${randomCharacterId}`);
     });
     it('to detect button after the loading', () => {
@@ -47,9 +51,31 @@ describe('the character detail page is functioned correctly', () => {
     });
 
     it('to check if the quote is loaded correctly', () => {
-      cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).then(intersection => {
-        assert.isNotNull(intersection.response.body);
-      });
+      cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).its('response.statusCode').should('eq', 200);
+      cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
+        .its('response.body')
+        .should(data => {
+          expect(data[0].author).to.be.eq(mockedCharacterData.name);
+        });
     });
+  });
+});
+
+describe('to test invalid request', () => {
+  const wrongId = 'blabla';
+  beforeEach(() => {
+    cy.intercept('GET', `${GET_CHARACTERS}/${wrongId}`).as(CHARACTER_DETAIL_BAD_REQUEST);
+  });
+
+  beforeEach(() => {
+    cy.visit(`/${wrongId}`);
+  });
+
+  it('to show loading component', () => {
+    cy.get('#page-loading');
+  });
+
+  it('receive error', () => {
+    cy.wait(`@${CHARACTER_DETAIL_BAD_REQUEST}`).its('response.statusCode').should('eq', 500);
   });
 });
