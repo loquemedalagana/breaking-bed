@@ -136,7 +136,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
     <DetailPageCardBox id={`character-detail-${character.characterId}`}>
       <CardImage src={character.img} alt={character.name} />
       <CharacterInfo>
-        <Typography gutterBottom align="center" variant="h5" component="div">
+        <Typography id={`character-name-${character.name}`} gutterBottom align="center" variant="h5" component="div">
           {character.name}
         </Typography>
         <Table size="small">

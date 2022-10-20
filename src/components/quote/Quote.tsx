@@ -35,7 +35,9 @@ const Quote: React.FC = () => {
   if (randomQuoteStore?.state.data) {
     return (
       <QuoteBox>
-        <QuoteText>{randomQuoteStore.state.data.quote}</QuoteText>
+        <QuoteText id={`quote-text-by-${randomQuoteStore.state.data.author}`}>
+          {randomQuoteStore.state.data.quote}
+        </QuoteText>
         <Button
           id="refresh-quote-button"
           variant="contained"
