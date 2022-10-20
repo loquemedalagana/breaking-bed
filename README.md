@@ -11,6 +11,7 @@ This repository is for the application where the details of the characters of th
 yarn start
 
 # how to e2e test
+yarn start
 yarn run cypress open
 
 # how to functional test
