@@ -11,6 +11,7 @@ This repository is for the application where the details of the characters of th
 yarn start
 
 # how to test
+
 yarn test
 
 # how to build
@@ -30,6 +31,7 @@ yarn build
 ### state management - redux and redux saga
 
 `Character List`
+
 - 
 
 
