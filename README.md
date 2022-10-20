@@ -10,8 +10,10 @@ This repository is for the application where the details of the characters of th
 # how to start
 yarn start
 
-# how to test
+# how to e2e test
+yarn run cypress open
 
+# how to functional test
 yarn test
 
 # how to build
@@ -28,18 +30,29 @@ yarn build
 
 - to show character detail and famous quote
 
-### state management - redux and redux saga
+
+
+## Project Structure
+
+
+## State Management
+
+### Redux, Redux Saga
 
 `Character List`
 
 - 
 
 
-### state management - context API
+### Context API
 - These states are used in the Context API because of the compatibility with the current route params.
 
 `Character Detail`
 
+- 
+
 `Quote`
+
+- 
 
 ### central state control libraries' comparison
