@@ -36,26 +36,34 @@ describe('the character detail page is functioned correctly', () => {
         });
       cy.get(`#character-detail-${randomCharacterId}`);
     });
-    it('to detect button after the loading', () => {
-      cy.get('#refresh-quote-button');
-    });
   });
 
   context('to test quote component', () => {
-    it('to click button', () => {
-      cy.get('#refresh-quote-button').click();
+    it('to click button if a quote exists', () => {
+      cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).its('response.statusCode').should('eq', 200);
+      cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
+        .its('response.body')
+        .should(data => {
+          if (data.length > 0) {
+            cy.get('#refresh-quote-button').click();
+          }
+        });
     });
 
     it('to show loading component', () => {
       cy.get('#item-loading');
     });
 
-    it('to check if the quote is loaded correctly', () => {
+    it('to check if another quote is loaded correctly', () => {
       cy.wait(`@${CHARACTER_QUOTE_REQUEST}`).its('response.statusCode').should('eq', 200);
       cy.get(`@${CHARACTER_QUOTE_REQUEST}`)
         .its('response.body')
         .should(data => {
-          expect(data[0].author).to.be.eq(mockedCharacterData.name);
+          if (data.length > 0) {
+            expect(data[0].author).to.be.eq(mockedCharacterData.name);
+          } else {
+            // TODO: show that his or her quote doesn't exist
+          }
         });
     });
   });
@@ -77,5 +85,9 @@ describe('to test invalid request', () => {
 
   it('receive error', () => {
     cy.wait(`@${CHARACTER_DETAIL_BAD_REQUEST}`).its('response.statusCode').should('eq', 500);
+  });
+
+  it('detect go back button', () => {
+    cy.get('#go-back-button');
   });
 });

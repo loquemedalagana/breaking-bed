@@ -40,7 +40,7 @@ const Error: React.FC = () => {
         <h1>Error..</h1>
         <h2>{t('Something went wrong..')}</h2>
         <h3>{t('Please try again.')}</h3>
-        <Button variant="contained" onClick={handleGoBack}>
+        <Button id="go-back-button" variant="contained" onClick={handleGoBack}>
           {t('Go back')}
         </Button>
       </ErrorContentBox>
