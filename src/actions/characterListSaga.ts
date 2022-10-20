@@ -4,7 +4,7 @@ import restApiCharacterList from 'src/http/restApiCharacterList';
 import { CHARACTER_LIST_ERROR, CHARACTER_LIST_LOADING, CHARACTER_LIST_SUCCESS } from 'src/actions/types';
 import { CharacterListState } from 'src/stores/characterListStore';
 
-function* fetchCharacterList(): Generator {
+export function* fetchCharacterList(): Generator {
   try {
     const characterListCurrentState = (yield select(state => state)) as CharacterListState;
     const { page, isReachedEnd } = characterListCurrentState;
