@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -64,10 +65,12 @@ interface LoadingProps {
 }
 
 const Loading: React.FC<LoadingProps> = ({ isPageLoading }) => {
+  const { t } = useTranslation();
+
   if (isPageLoading) {
     return (
       <LoadingPageBox>
-        <PageLoader>Loading</PageLoader>
+        <PageLoader>{t('Loading')}</PageLoader>
       </LoadingPageBox>
     );
   }

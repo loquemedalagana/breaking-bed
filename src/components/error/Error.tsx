@@ -4,12 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
-const ErrorPageBox = styled.section`
+const ErrorPageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  min-height: 50vh;
+`;
+
+const ErrorContentBox = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+  }
 `;
 
 const Error: React.FC = () => {
@@ -22,11 +36,14 @@ const Error: React.FC = () => {
 
   return (
     <ErrorPageBox>
-      <h1>Error..</h1>
-      <h2>{t('error:Something went wrong..')}</h2>
-      <Button variant="contained" onClick={handleGoBack}>
-        {t('button:go back')}
-      </Button>
+      <ErrorContentBox>
+        <h1>Error..</h1>
+        <h2>{t('Something went wrong..')}</h2>
+        <h3>{t('Please try again.')}</h3>
+        <Button variant="contained" onClick={handleGoBack}>
+          {t('Go back')}
+        </Button>
+      </ErrorContentBox>
     </ErrorPageBox>
   );
 };

@@ -4,5 +4,15 @@
   "birthday": "birthday",
   "occupations": "occupations",
   "portrayed": "portrayed",
-  "appearance": "appearance"
+  "appearance": "appearance",
+  "Load another quote": "Load another quote",
+  "Something went wrong..": "Something went wrong..",
+  "Go back": "Go back",
+  "Please try again.": "Please try again.",
+  "alive": "alive",
+  "deceased": "deceased",
+  "presumed dead": "presumed dead",
+  "unknown": "unknown",
+  "Loading": "Loading",
+  "Source code is here": "Source code is here"
 }

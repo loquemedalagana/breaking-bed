@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import { HEADER_HEIGHT } from 'src/components/header/constants';
 import { URL_CHARACTERS } from 'src/routes/routeURL';
+import SelectLanguage from 'src/components/select_language/SelectLanguage';
 
 const HeaderBox = styled.header`
   left: 0;
@@ -32,6 +33,7 @@ const HeaderBox = styled.header`
 const HeaderBody = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Header: React.FC = () => {
@@ -39,8 +41,7 @@ const Header: React.FC = () => {
     <HeaderBox>
       <HeaderBody className="layout-space">
         <Link to={URL_CHARACTERS}>Breaking Bed</Link>
-        {/* Language state should be added */}
-        <div>language select</div>
+        <SelectLanguage />
       </HeaderBody>
     </HeaderBox>
   );

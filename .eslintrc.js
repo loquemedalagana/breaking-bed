@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-empty-function': 'warn',
-    '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
