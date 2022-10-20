@@ -41,7 +41,7 @@ export type RandomQuoteActionType =
     }
   | {
       type: typeof RANDOM_QUOTE_SUCCESS;
-      data: Quote;
+      data: Quote | null;
     }
   | {
       type: typeof RANDOM_QUOTE_ERROR;

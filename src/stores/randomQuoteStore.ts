@@ -69,7 +69,6 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
       const data = await restApiRandomQuote(characterName);
       dispatch({ type: RANDOM_QUOTE_SUCCESS, data });
     } catch (e) {
-      console.log(e);
       dispatch({ type: RANDOM_QUOTE_ERROR, error: e });
     }
   };
