@@ -1,6 +1,6 @@
 import * as characterDetailActions from 'src/actions/characterDetailActions';
 import { characterDetailReducer, initialState } from 'src/stores/characterDeatilStore';
-import mockedCharacterList from 'src/tests/mocks/characterList';
+import mockedCharacterList from 'src/tests/mocks/mockedCharacterList';
 import Character, { ServerCharacterData } from 'src/models/Character';
 
 describe('character detail reducer test', () => {
