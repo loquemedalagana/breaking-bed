@@ -1,30 +1,6 @@
 import * as characterListActions from 'src/actions/characterListActions';
-import { CHARACTER_COUNT_PER_PAGE } from 'src/http/restApiCharacterList';
-import Character, { ServerCharacterData } from 'src/models/Character';
-import { CharacterListState, initialState, characterListReducer } from 'src/stores/characterListStore';
-import mockedCharacterList from 'src/tests/mocks/mockedCharacterList';
-
-const getSampleDataList = (page: number): Character[][] => {
-  const sampleList = mockedCharacterList.map((data: any) => new Character(data as ServerCharacterData));
-
-  if (page <= 0) {
-    return [
-      [],
-      sampleList.slice(
-        page * CHARACTER_COUNT_PER_PAGE,
-        page * CHARACTER_COUNT_PER_PAGE + CHARACTER_COUNT_PER_PAGE,
-      ),
-    ];
-  }
-
-  return [
-    sampleList.slice(0, page * CHARACTER_COUNT_PER_PAGE),
-    sampleList.slice(
-      page * CHARACTER_COUNT_PER_PAGE,
-      page * CHARACTER_COUNT_PER_PAGE + CHARACTER_COUNT_PER_PAGE,
-    ),
-  ];
-};
+import { characterListReducer, CharacterListState, initialState } from 'src/stores/characterListStore';
+import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
 describe('character list reducer test', () => {
   const samplePreviousPage = 1;
