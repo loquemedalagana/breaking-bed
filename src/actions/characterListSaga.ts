@@ -6,8 +6,7 @@ import { CharacterListState } from 'src/stores/characterListStore';
 
 export function* fetchCharacterList(): Generator {
   try {
-    const characterListCurrentState = (yield select(state => state)) as CharacterListState;
-    const { page, isReachedEnd } = characterListCurrentState;
+    const { page, isReachedEnd } = (yield select(state => state)) as CharacterListState;
 
     if (isReachedEnd) {
       return;

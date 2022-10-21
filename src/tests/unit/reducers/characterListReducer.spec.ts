@@ -3,11 +3,11 @@ import { characterListReducer, CharacterListState, initialState } from 'src/stor
 import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
 describe('character list reducer test', () => {
-  const samplePreviousPage = 1;
-  const [prevSampleData, nextSampleData] = getSampleDataList(samplePreviousPage);
+  const samplePrevPageNumber = 1;
+  const [prevSampleData, nextSampleData] = getSampleDataList(samplePrevPageNumber);
 
   const samplePrevState: CharacterListState = {
-    page: samplePreviousPage,
+    page: samplePrevPageNumber,
     data: prevSampleData,
     loading: false,
     error: null,
@@ -23,7 +23,7 @@ describe('character list reducer test', () => {
       characterListReducer(
         {
           ...initialState,
-          page: samplePreviousPage,
+          page: samplePrevPageNumber,
           data: prevSampleData,
         },
         {
@@ -55,7 +55,7 @@ describe('character list reducer test', () => {
       loading: false,
       data: [...prevSampleData, ...nextSampleData],
       error: null,
-      page: samplePreviousPage + 1,
+      page: samplePrevPageNumber + 1,
     });
   });
 
