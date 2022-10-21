@@ -26,7 +26,27 @@ const ErrorContentBox = styled.section`
   }
 `;
 
-const Error: React.FC = () => {
+const ErrorTextBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  gap: 32px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
+`;
+
+interface ErrorProps {
+  isErrorPage?: boolean;
+}
+
+const Error: React.FC<ErrorProps> = ({ isErrorPage }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -34,17 +54,25 @@ const Error: React.FC = () => {
     navigate(-1);
   };
 
+  if (isErrorPage) {
+    return (
+      <ErrorPageBox id="error-page">
+        <ErrorContentBox>
+          <h1>Error..</h1>
+          <h2>{t('Something went wrong..')}</h2>
+          <h3>{t('Please try again.')}</h3>
+          <Button id="go-back-button" variant="contained" onClick={handleGoBack}>
+            {t('Go back')}
+          </Button>
+        </ErrorContentBox>
+      </ErrorPageBox>
+    );
+  }
+
   return (
-    <ErrorPageBox id="error-page">
-      <ErrorContentBox>
-        <h1>Error..</h1>
-        <h2>{t('Something went wrong..')}</h2>
-        <h3>{t('Please try again.')}</h3>
-        <Button variant="contained" onClick={handleGoBack}>
-          {t('Go back')}
-        </Button>
-      </ErrorContentBox>
-    </ErrorPageBox>
+    <ErrorTextBox id="error-message">
+      <p>{t('Something went wrong..')}</p>
+    </ErrorTextBox>
   );
 };
 

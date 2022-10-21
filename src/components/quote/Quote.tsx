@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 
+import Error from 'src/components/error/Error';
 import Loading from 'src/components/loading/Loading';
 import { RandomQuoteContext } from 'src/stores/contexts';
 
@@ -51,11 +52,10 @@ const Quote: React.FC = () => {
   }
 
   if (randomQuoteStore?.state.error) {
-    console.log(randomQuoteStore.state.error);
-    return <QuoteBox>an error occurred!!</QuoteBox>;
+    return <Error />;
   }
 
-  return <></>;
+  return <QuoteBox id="quote-text-empty">{t('He or she does not have quote.')}</QuoteBox>;
 };
 
 export default Quote;

@@ -39,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
-    "i18n": "npx i18next-scanner"
+    "i18n": "npx i18next-scanner",
+    "cypress": "npx cypress open"
   },
   "eslintConfig": {
     "extends": [
