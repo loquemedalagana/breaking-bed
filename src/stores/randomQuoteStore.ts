@@ -16,6 +16,12 @@ export interface RandomQuoteState {
   error: Error | null | unknown;
 }
 
+export const initialState = {
+  loading: false,
+  data: null,
+  error: null,
+};
+
 export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteActionType): RandomQuoteState => {
   switch (action.type) {
     case RANDOM_QUOTE_INIT:
@@ -33,14 +39,14 @@ export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteA
     case RANDOM_QUOTE_SUCCESS:
       return {
         loading: false,
-        data: action.data,
+        data: action.payload.data,
         error: null,
       };
     case RANDOM_QUOTE_ERROR:
       return {
         loading: false,
         data: null,
-        error: action.error,
+        error: action.payload.error,
       };
     default:
       return {
@@ -58,18 +64,14 @@ export interface RandomQuoteStore {
 }
 
 const useRandomQuoteStore = (): RandomQuoteStore => {
-  const [state, dispatch] = useReducer(randomQuoteReducer, {
-    loading: false,
-    data: null,
-    error: null,
-  });
+  const [state, dispatch] = useReducer(randomQuoteReducer, initialState);
   const fetchCharacterRandomQuote = async (characterName: string): Promise<void> => {
     dispatch({ type: RANDOM_QUOTE_REQUEST });
     try {
       const data = await restApiRandomQuote(characterName);
-      dispatch({ type: RANDOM_QUOTE_SUCCESS, data });
+      dispatch({ type: RANDOM_QUOTE_SUCCESS, payload: { data } });
     } catch (e) {
-      dispatch({ type: RANDOM_QUOTE_ERROR, error: e });
+      dispatch({ type: RANDOM_QUOTE_ERROR, payload: { error: e } });
     }
   };
 

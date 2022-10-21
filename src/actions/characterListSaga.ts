@@ -1,10 +1,8 @@
-import { call, put, select, fork, throttle } from 'redux-saga/effects';
+import { call, fork, put, select, throttle } from 'redux-saga/effects';
 
 import { CHARACTER_LIST_ERROR, CHARACTER_LIST_REQUEST, CHARACTER_LIST_SUCCESS } from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
 import { CharacterListState } from 'src/stores/characterListStore';
-
-export const CHARACTER_COUNT_PER_PAGE = 4;
 
 export function* fetchCharacterList(): Generator {
   try {

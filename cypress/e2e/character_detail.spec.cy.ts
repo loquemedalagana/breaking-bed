@@ -1,4 +1,4 @@
-import characterList from '../../src/tests/mocks/characterList';
+import mockedCharacterList from '../../src/tests/mocks/mockedCharacterList';
 import Character, { ServerCharacterData } from '../../src/models/Character';
 import { GET_CHARACTERS, GET_QUOTES } from './apiURLforTest';
 
@@ -9,7 +9,7 @@ const CHARACTER_QUOTE_REQUEST = 'character-quote-request';
 describe('the character detail page is functioned correctly', () => {
   const [RANDOM_CHARACTER_ID_MIN, RANDOM_CHARACTER_ID_MAX] = [1, 30];
   const randomCharacterId = Math.floor(Math.random() * (RANDOM_CHARACTER_ID_MAX - RANDOM_CHARACTER_ID_MIN) + 1);
-  const fetchedCharacterData = characterList.filter(data => data.char_id === randomCharacterId);
+  const fetchedCharacterData = mockedCharacterList.filter(data => data.char_id === randomCharacterId);
   const mockedCharacterData = new Character(fetchedCharacterData[0] as ServerCharacterData);
   const enCodedCharacterName = mockedCharacterData.name.replace(' ', '+');
 
