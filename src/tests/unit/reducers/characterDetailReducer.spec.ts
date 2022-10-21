@@ -1,5 +1,5 @@
 import * as characterDetailActions from 'src/actions/characterDetailActions';
-import { characterDetailReducer, initialState } from 'src/stores/characterDeatilStore';
+import { characterDetailReducer, initialState } from 'src/stores/characterDetailStore';
 import mockedCharacterList from 'src/tests/mocks/mockedCharacterList';
 import Character, { ServerCharacterData } from 'src/models/Character';
 
