@@ -6,7 +6,7 @@ import {
   RANDOM_QUOTE_LOADING,
   RANDOM_QUOTE_SUCCESS,
   RandomQuoteActionType,
-} from 'src/actions/types';
+} from 'src/actions/randomQuoteActions';
 import restApiRandomQuote from 'src/http/restApiRandomQuote';
 import Quote from 'src/models/Quote';
 
