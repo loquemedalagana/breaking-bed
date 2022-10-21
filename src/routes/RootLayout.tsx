@@ -47,7 +47,8 @@ const Body = styled.main`
   margin-top: ${HEADER_HEIGHT}px;
   align-items: flex-start;
   justify-content: center;
-  min-height: calc(100vh - ${FOOTER_HEIGHT}px);
+  min-height: calc(100vh - ${FOOTER_HEIGHT + HEADER_HEIGHT}px);
+  overflow-y: scroll;
 `;
 
 const RootLayout: React.FC<LayoutRouteProps> = () => {
@@ -58,8 +59,8 @@ const RootLayout: React.FC<LayoutRouteProps> = () => {
         <Body>
           <Outlet />
         </Body>
+        <Footer />
       </LayoutBox>
-      <Footer />
     </RootLayoutWrapper>
   );
 };
