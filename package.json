@@ -78,6 +78,7 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1",
+    "redux-saga-test-plan": "^4.0.6",
     "ts-node": "^10.9.1"
   }
 }
