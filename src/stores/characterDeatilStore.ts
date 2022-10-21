@@ -2,11 +2,11 @@ import { useReducer } from 'react';
 
 import {
   CHARACTER_DETAIL_ERROR,
+  CHARACTER_DETAIL_INIT,
   CHARACTER_DETAIL_LOADING,
   CHARACTER_DETAIL_SUCCESS,
-  CHARACTER_DETAIL_INIT,
   CharacterDetailActionType,
-} from 'src/actions/types';
+} from 'src/actions/characterDetailActions';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
 import Character from 'src/models/Character';
 
