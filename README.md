@@ -10,12 +10,18 @@ This repository is for the application where the details of the characters of th
 # how to start
 yarn start
 
-# how to test
+# how to e2e test
+## before the app should be started
+yarn cypress
+
+# how to functional test
 yarn test
 
 # how to build
 yarn build
 ```
+
+<hr />
 
 ## Routes
 
@@ -23,21 +29,39 @@ yarn build
 
 - to show character list
 
-### state management - redux
-
 `/:characterId`
 
-- to show character detail and a famous phrase
+- to show character detail and famous quote
 
-### state management - context API
+<hr/>
 
-## Used Libraries
+## Project Structure
 
-1. [immer](https://immerjs.github.io/immer/)
-2. [axios](https://axios-http.com/es/docs/intro)
-3. [dayjs](https://day.js.org/docs/en/display/calendar-time)
-4. [i18n](https://react.i18next.com/guides/quick-start)
-5. [material UI](https://mui.com/material-ui/getting-started/overview/)
-6. [redux toolkit](https://redux.js.org/tutorials/fundamentals/part-8-modern-redux)
+### UI
 
-- As `createStore` was deprecated in the latest version, I've no choice but to use toolkit. Nevertheless, I know that `createStore` is used when converting combined reducers into a single store.
+### business logics
+
+### test
+
+<hr/>
+
+## State Management
+
+### Redux, Redux Saga
+
+`Character List`
+
+- 
+
+
+### Context API
+- These states are used in the Context API because of the compatibility with the current route params.
+
+`Character Detail`
+
+- 
+
+`Quote`
+
+- 
+

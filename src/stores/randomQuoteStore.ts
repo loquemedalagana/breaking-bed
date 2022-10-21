@@ -3,10 +3,10 @@ import { useReducer } from 'react';
 import {
   RANDOM_QUOTE_ERROR,
   RANDOM_QUOTE_INIT,
-  RANDOM_QUOTE_LOADING,
+  RANDOM_QUOTE_REQUEST,
   RANDOM_QUOTE_SUCCESS,
   RandomQuoteActionType,
-} from 'src/actions/types';
+} from 'src/actions/randomQuoteActions';
 import restApiRandomQuote from 'src/http/restApiRandomQuote';
 import Quote from 'src/models/Quote';
 
@@ -24,7 +24,7 @@ export const randomQuoteReducer = (state: RandomQuoteState, action: RandomQuoteA
         data: null,
         error: null,
       };
-    case RANDOM_QUOTE_LOADING:
+    case RANDOM_QUOTE_REQUEST:
       return {
         loading: true,
         data: null,
@@ -64,12 +64,11 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
     error: null,
   });
   const fetchCharacterRandomQuote = async (characterName: string): Promise<void> => {
-    dispatch({ type: RANDOM_QUOTE_LOADING });
+    dispatch({ type: RANDOM_QUOTE_REQUEST });
     try {
       const data = await restApiRandomQuote(characterName);
       dispatch({ type: RANDOM_QUOTE_SUCCESS, data });
     } catch (e) {
-      console.log(e);
       dispatch({ type: RANDOM_QUOTE_ERROR, error: e });
     }
   };

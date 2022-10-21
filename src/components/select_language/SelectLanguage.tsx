@@ -56,7 +56,7 @@ const SelectLanguage: React.FC<SelectLanguageProps> = () => {
 
   return (
     <SelectBox>
-      <StyledSelectOptions onChange={handleSelectLanguage} defaultValue={i18n.language}>
+      <StyledSelectOptions id="select-language-button" onChange={handleSelectLanguage} defaultValue={i18n.language}>
         <StyledOption value="es">🇪🇸 Es</StyledOption>
         <StyledOption value="en">🇬🇧 En</StyledOption>
       </StyledSelectOptions>
