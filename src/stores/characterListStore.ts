@@ -3,7 +3,12 @@ import createSagaMiddleware from 'redux-saga';
 
 import characterListSaga from 'src/actions/characterListSaga';
 import Character from 'src/models/Character';
-import { characterListError, characterListLoading, characterListSuccess } from 'src/actions/characterListActions';
+import {
+  characterListError,
+  characterListRequest,
+  characterListSuccess,
+  getReachedEnd,
+} from 'src/actions/characterListActions';
 
 export interface CharacterListState {
   page: number;
@@ -20,15 +25,13 @@ export const initialState: CharacterListState = {
   isReachedEnd: false,
 };
 
-export const CHARACTER_COUNT_PER_PAGE = 4;
-
 const characterListSlice = createSlice({
   name: 'character-list',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(characterListLoading, state => {
+      .addCase(characterListRequest, state => {
         return {
           ...state,
           loading: true,
@@ -48,6 +51,12 @@ const characterListSlice = createSlice({
           ...state,
           loading: false,
           error: action.payload.error,
+        };
+      })
+      .addCase(getReachedEnd, (state, action) => {
+        return {
+          ...state,
+          isReachedEnd: true,
         };
       })
       .addDefaultCase(state => {

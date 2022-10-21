@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import {
   CHARACTER_DETAIL_ERROR,
   CHARACTER_DETAIL_INIT,
-  CHARACTER_DETAIL_LOADING,
+  CHARACTER_DETAIL_REQUEST,
   CHARACTER_DETAIL_SUCCESS,
   CharacterDetailActionType,
 } from 'src/actions/characterDetailActions';
@@ -29,7 +29,7 @@ export const characterDetailReducer = (
   switch (action.type) {
     case CHARACTER_DETAIL_INIT:
       return initialState;
-    case CHARACTER_DETAIL_LOADING:
+    case CHARACTER_DETAIL_REQUEST:
       return {
         loading: true,
         data: null,
@@ -70,6 +70,9 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
   });
 
   const fetchCharacterDetail = async (characterId: string): Promise<void> => {
+    dispatch({
+      type: CHARACTER_DETAIL_REQUEST,
+    });
     try {
       const data = await restApiCharacterDetail(characterId);
       dispatch({ type: CHARACTER_DETAIL_SUCCESS, data });
