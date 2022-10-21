@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as dayjs from 'dayjs';
 import calender from 'dayjs/plugin/calendar';
@@ -84,9 +84,7 @@ interface CharacterCardProps {
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  // TODO: es should be added
   dayjs.locale('en');
   dayjs.extend(calender);
 
