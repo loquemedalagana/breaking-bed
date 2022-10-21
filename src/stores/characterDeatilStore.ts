@@ -38,14 +38,14 @@ export const characterDetailReducer = (
     case CHARACTER_DETAIL_SUCCESS:
       return {
         loading: false,
-        data: action.data,
+        data: action.payload.data,
         error: null,
       };
     case CHARACTER_DETAIL_ERROR:
       return {
         loading: false,
         data: null,
-        error: action.error,
+        error: action.payload.error,
       };
     default:
       return {
@@ -75,9 +75,9 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
     });
     try {
       const data = await restApiCharacterDetail(characterId);
-      dispatch({ type: CHARACTER_DETAIL_SUCCESS, data });
+      dispatch({ type: CHARACTER_DETAIL_SUCCESS, payload: { data } });
     } catch (e) {
-      dispatch({ type: CHARACTER_DETAIL_ERROR, error: e });
+      dispatch({ type: CHARACTER_DETAIL_ERROR, payload: { error: e } });
     }
   };
 
