@@ -3,7 +3,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { CharacterDetailContext, RandomQuoteContext } from 'src/stores/contexts';
 import useRandomQuoteStore from 'src/stores/randomQuoteStore';
-import useCharacterDetailStore from 'src/stores/characterDeatilStore';
+import useCharacterDetailStore from 'src/stores/characterDetailStore';
 import characterListStore from 'src/stores/characterListStore';
 
 interface Props {

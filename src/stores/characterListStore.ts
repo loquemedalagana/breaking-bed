@@ -65,6 +65,9 @@ const characterListSlice = createSlice({
   },
 });
 
+export const characterListActions = characterListSlice.actions;
+export const characterListReducer = characterListSlice.reducer;
+
 const sagaMiddleWare = createSagaMiddleware();
 
 const characterListStore = configureStore({

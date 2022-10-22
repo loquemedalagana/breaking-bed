@@ -14,9 +14,13 @@ export type RandomQuoteActionType =
     }
   | {
       type: typeof RANDOM_QUOTE_SUCCESS;
-      data: Quote | null;
+      payload: {
+        data: Quote | null;
+      };
     }
   | {
       type: typeof RANDOM_QUOTE_ERROR;
-      error: Error | unknown;
+      payload: {
+        error: Error | unknown;
+      };
     };

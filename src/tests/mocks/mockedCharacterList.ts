@@ -1,4 +1,7 @@
-export default [
+import Character, { ServerCharacterData } from 'src/models/Character';
+import { CHARACTER_COUNT_PER_PAGE } from 'src/http/restApiCharacterList';
+
+const mockedCharacterList = [
   {
     char_id: 1,
     name: 'Walter White',
@@ -806,3 +809,14 @@ export default [
     better_call_saul_appearance: [4, 5],
   },
 ];
+
+export default mockedCharacterList;
+
+export const getSampleDataList = (page: number): Character[][] => {
+  const sampleList = mockedCharacterList.map((data: any) => new Character(data as ServerCharacterData));
+
+  return [
+    sampleList.slice(0, page * CHARACTER_COUNT_PER_PAGE),
+    sampleList.slice(page * CHARACTER_COUNT_PER_PAGE, page * CHARACTER_COUNT_PER_PAGE + CHARACTER_COUNT_PER_PAGE),
+  ];
+};

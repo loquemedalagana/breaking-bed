@@ -14,9 +14,13 @@ export type CharacterDetailActionType =
     }
   | {
       type: typeof CHARACTER_DETAIL_SUCCESS;
-      data: Character;
+      payload: {
+        data: Character;
+      };
     }
   | {
       type: typeof CHARACTER_DETAIL_ERROR;
-      error: Error | unknown;
+      payload: {
+        error: Error | unknown;
+      };
     };

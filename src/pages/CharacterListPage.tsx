@@ -12,7 +12,7 @@ const CharacterListPage: React.FC = () => {
   const [bottomRef, inView] = useInView({});
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !characterListState.isReachedEnd) {
       dispatch({
         type: CHARACTER_LIST_REQUEST,
       });
