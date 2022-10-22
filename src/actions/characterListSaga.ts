@@ -1,24 +1,37 @@
 import { call, fork, put, select, throttle } from 'redux-saga/effects';
 
-import { CHARACTER_LIST_ERROR, CHARACTER_LIST_REQUEST, CHARACTER_LIST_SUCCESS } from 'src/actions/characterListActions';
+import {
+  CHARACTER_LIST_ERROR,
+  CHARACTER_LIST_REQUEST,
+  CHARACTER_LIST_SUCCESS,
+  GET_REACHED_END,
+} from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
+import Character from 'src/models/Character';
 import { CharacterListState } from 'src/stores/characterListStore';
 
 export function* fetchCharacterList(): Generator {
-  try {
-    const { page, isReachedEnd } = (yield select(state => state)) as CharacterListState;
+  const { page, isReachedEnd } = (yield select(state => state)) as CharacterListState;
 
+  try {
     if (isReachedEnd) {
       return;
     }
 
-    const characterList = yield call(restApiCharacterList, page);
-    yield put({
-      type: CHARACTER_LIST_SUCCESS,
-      payload: {
-        data: characterList,
-      },
-    });
+    const characterList = (yield call(restApiCharacterList, page)) as Character[];
+
+    if (characterList.length > 0) {
+      yield put({
+        type: CHARACTER_LIST_SUCCESS,
+        payload: {
+          data: characterList,
+        },
+      });
+    } else {
+      yield put({
+        type: GET_REACHED_END,
+      });
+    }
   } catch (e) {
     yield put({
       type: CHARACTER_LIST_ERROR,

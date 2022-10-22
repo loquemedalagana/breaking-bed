@@ -10,7 +10,8 @@ import characterListRootSaga, { fetchCharacterList, watchFetchCharacterList } fr
 import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
 describe('unit testing for character list saga', () => {
-  const samplePrevPageNumber = 0;
+  const samplePrevPageNumber = 15;
+  const lastPageNumber = 16;
   const [prevSampleData, nextSampleData] = getSampleDataList(samplePrevPageNumber);
 
   const samplePrevState: CharacterListState = {
@@ -61,6 +62,32 @@ describe('unit testing for character list saga', () => {
         payload: {
           error: new Error('error'),
         },
+      })
+      .run();
+  });
+
+  it('get reached end action test', async () => {
+    const [prevLastCharacterList, nextLastCharacterList] = getSampleDataList(lastPageNumber);
+
+    return await expectSaga(fetchCharacterList)
+      .withState({
+        ...samplePrevState,
+        page: lastPageNumber,
+        data: prevLastCharacterList,
+      })
+      .provide([
+        [
+          select((state: CharacterListState) => state),
+          {
+            ...samplePrevState,
+            page: lastPageNumber,
+            data: prevLastCharacterList,
+          },
+        ],
+        [matchers.call.fn(restApiCharacterList), nextLastCharacterList],
+      ])
+      .put({
+        type: characterListActions.GET_REACHED_END,
       })
       .run();
   });
