@@ -46,7 +46,7 @@ class Character {
     if (birthdayData === 'Unknown') {
       return undefined;
     }
-    return new Date(birthdayData);
+    return new Date(birthdayData.replace(/-/g, '/'));
   }
 }
 

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import * as dayjs from 'dayjs';
-import calender from 'dayjs/plugin/calendar';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
+import 'dayjs/locale/es';
+import calendar from 'dayjs/plugin/calendar';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import styled from '@emotion/styled';
 import MuiCard from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,7 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-import Image from "src/components/image/Image";
+import Image from 'src/components/image/Image';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import Character from 'src/models/Character';
 import { URL_CHARACTERS } from 'src/routes/routeURL';
@@ -76,10 +79,15 @@ interface CharacterCardProps {
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  dayjs.locale('en');
-  dayjs.extend(calender);
+  dayjs.locale(i18n.language);
+  dayjs.extend(calendar);
+  dayjs.extend(localizedFormat);
+
+  const getLocalizeBirthday = (date: Date): string => {
+    return dayjs(date, { locale: i18n.language }).format('LL');
+  };
 
   const getCharacterState = (state: string): string => {
     switch (state) {
@@ -141,7 +149,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
             {character.birthday && (
               <TableRow>
                 <TableCell>{t('birthday')}</TableCell>
-                <TableCell align="right">{character.birthday?.toDateString()}</TableCell>
+                <TableCell align="right">{getLocalizeBirthday(character.birthday)}</TableCell>
               </TableRow>
             )}
             {character.occupation && (
