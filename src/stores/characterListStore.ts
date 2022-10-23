@@ -56,6 +56,7 @@ const characterListSlice = createSlice({
       .addCase(getReachedEnd, (state, action) => {
         return {
           ...state,
+          loading: false,
           isReachedEnd: true,
         };
       })
