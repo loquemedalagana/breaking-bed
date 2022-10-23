@@ -39,6 +39,11 @@ yarn i18n
 
 <hr/>
 
+## Deployment
+- [current version is here](https://lovely-gumption-8674d2.netlify.app/)
+
+<hr/>
+
 ## Project Structure
 ```
 .
@@ -76,7 +81,8 @@ yarn i18n
 │   │   ├── contexts.ts // context api files
 │   │   ├── characterDetailStore.ts
 │   │   ├── characterListStore.ts
-│   │   └── randomQuoteStore.ts
+│   │   ├── randomQuoteStore.ts
+│   │   └── rootStore.ts
 │   ├── styles/
 │   │   └── theme.js # this file is for MUI
 │   ├── tests/
@@ -148,6 +154,9 @@ yarn i18n
 - The reducer is defined in ```characterDetailStore.ts``` as ```characterDetailReducer```, a pure function.
 
 #### How to be used in components?
+- When ```CharacterListPage.tsx``` is rendered, ```getCharacterDetailInfo``` in the ```custom hook``` will be called.
+- If the data already is loaded in the ```Redux Store```, ```the character's info``` can be brought from ```characterListStore``` without any unnecessary request.
+- If there is nothing in the ```characterListState```, ```fetchCharacterDetail``` will be called.
 
 #### Why ```Context``` was used?
 - To control ```side-effects``` more comfortably, I used ```Context``` rather than ```Redux Saga``` using cleanup functions.

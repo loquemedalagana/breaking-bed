@@ -41,7 +41,7 @@ interface CharacterListProps {
 
 const CharacterList: React.FC<CharacterListProps> = ({ characterList, isReachedEnd, isLoading, bottomRef }) => {
   return (
-    <CharacterListPageWrapper className="layout-space">
+    <CharacterListPageWrapper id="character-list" className="layout-space">
       <CharacterListPageBox>
         {characterList.map((characterListItem, index) => (
           <CharacterCard isListItem={true} character={characterListItem} key={`character-list-item${index}`} />

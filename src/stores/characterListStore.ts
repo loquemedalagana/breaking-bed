@@ -1,14 +1,13 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+import { createSlice } from '@reduxjs/toolkit';
 
-import characterListSaga from 'src/actions/characterListSaga';
-import Character from 'src/models/Character';
 import {
   characterListError,
   characterListRequest,
   characterListSuccess,
   getReachedEnd,
 } from 'src/actions/characterListActions';
+import Character from 'src/models/Character';
+import { RootState } from 'src/stores/rootStore';
 
 export interface CharacterListState {
   page: number;
@@ -17,6 +16,7 @@ export interface CharacterListState {
   error: Error | null | unknown;
   isReachedEnd: boolean;
 }
+
 export const initialState: CharacterListState = {
   page: 0,
   data: [],
@@ -24,8 +24,7 @@ export const initialState: CharacterListState = {
   loading: false,
   isReachedEnd: false,
 };
-
-const characterListSlice = createSlice({
+export const characterListSlice = createSlice({
   name: 'character-list',
   initialState,
   reducers: {},
@@ -69,21 +68,6 @@ const characterListSlice = createSlice({
 export const characterListActions = characterListSlice.actions;
 export const characterListReducer = characterListSlice.reducer;
 
-const sagaMiddleWare = createSagaMiddleware();
-
-const characterListStore = configureStore({
-  reducer: characterListSlice.reducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ thunk: false, serializableCheck: false }).prepend(sagaMiddleWare),
-});
-
-export type CharacterListRootState = ReturnType<typeof characterListStore.getState>;
-export type CharacterListDispatch = typeof characterListStore.dispatch;
-
-export const selectCharacterListState = (state: CharacterListRootState): CharacterListState => {
-  return state;
+export const selectCharacterListState = (state: RootState): CharacterListState => {
+  return state.characterList;
 };
-
-sagaMiddleWare.run(characterListSaga);
-
-export default characterListStore;

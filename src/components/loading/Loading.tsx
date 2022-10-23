@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { HEADER_HEIGHT } from 'src/components/header/constants';
+import { FOOTER_HEIGHT } from 'src/components/footer/constants';
+
 const itemLoader = keyframes`
   0% {
     box-shadow: -38px -12px ,  -14px 0,  14px 0, 38px 0;
@@ -34,6 +37,7 @@ const LoadingPageBox = styled.section`
   display: flex;
   width: 100%;
   height: 100%;
+  min-height: calc(100vh - ${FOOTER_HEIGHT + HEADER_HEIGHT}px);
   align-items: center;
   justify-content: center;
 `;

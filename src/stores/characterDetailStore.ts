@@ -9,7 +9,7 @@ import {
 } from 'src/actions/characterDetailActions';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
 import Character from 'src/models/Character';
-import characterListStore from 'src/stores/characterListStore';
+import rootStore from 'src/stores/rootStore';
 
 export interface CharacterDetailState {
   loading: boolean;
@@ -83,9 +83,9 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
   };
 
   const getCharacterDetailInfo = async (characterId: string): Promise<void> => {
-    const [storedCharacterDetailData] = characterListStore
+    const [storedCharacterDetailData] = rootStore
       .getState()
-      .data.filter(data => data.characterId === Number(characterId));
+      .characterList.data.filter(data => data.characterId === Number(characterId));
     try {
       if (storedCharacterDetailData) {
         dispatch({ type: CHARACTER_DETAIL_SUCCESS, payload: { data: storedCharacterDetailData } });
