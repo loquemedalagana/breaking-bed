@@ -4,7 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { CharacterDetailContext, RandomQuoteContext } from 'src/stores/contexts';
 import useRandomQuoteStore from 'src/stores/randomQuoteStore';
 import useCharacterDetailStore from 'src/stores/characterDetailStore';
-import characterListStore from 'src/stores/characterListStore';
+import rootStore from 'src/stores/rootStore';
 
 interface Props {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ const BreakingBedProvider: React.FC<Props> = ({ children }) => {
   const randomQuoteStore = useRandomQuoteStore();
 
   return (
-    <ReduxProvider store={characterListStore}>
+    <ReduxProvider store={rootStore}>
       <CharacterDetailContext.Provider value={characterDetailStore}>
         <RandomQuoteContext.Provider value={randomQuoteStore}>{children}</RandomQuoteContext.Provider>
       </CharacterDetailContext.Provider>
