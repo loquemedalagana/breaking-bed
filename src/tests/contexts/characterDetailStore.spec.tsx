@@ -22,7 +22,7 @@ describe('Character Detail Store Hook', () => {
 
   it('to fetch character detail test', async () => {
     await act(async () => {
-      await result.current.fetchCharacterDetail(String(randomCharacterId));
+      await result.current.getCharacterDetailInfo(String(randomCharacterId));
     });
     expect(result.current.state.data?.name.replace('&amp;', '')).toBe(mockedCharacterData.name);
   });

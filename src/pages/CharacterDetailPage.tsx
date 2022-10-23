@@ -13,7 +13,7 @@ const CharacterDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (params.characterId && characterDetailStore?.state?.data === null) {
-      characterDetailStore?.fetchCharacterDetail(params.characterId);
+      characterDetailStore?.getCharacterDetailInfo(params.characterId);
     }
 
     return () => {
