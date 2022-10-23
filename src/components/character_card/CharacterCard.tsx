@@ -13,8 +13,9 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-import Character from 'src/models/Character';
+import Image from "src/components/image/Image";
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
+import Character from 'src/models/Character';
 import { URL_CHARACTERS } from 'src/routes/routeURL';
 
 const CardBox = styled(MuiCard)`
@@ -106,7 +107,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
       <ListPageCardBox id={`character-list-item-${character.characterId}`}>
         <StyledLink to={`${URL_CHARACTERS}/${character.characterId}`}>
           <CardButtonBox id={`goto-character-detail-${character.characterId}`}>
-            <CardImage src={character.img} alt={character.name} />
+            <Image src={character.img} alt={character.name} />
             <CharacterInfo>
               <Typography gutterBottom align="center" variant="h5" component="div">
                 {character.name}
@@ -128,7 +129,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
 
   return (
     <DetailPageCardBox id={`character-detail-${character.characterId}`}>
-      <CardImage src={character.img} alt={character.name} />
+      <Image src={character.img} alt={character.name} />
       <CharacterInfo>
         <Typography id={`character-name-${character.name}`} gutterBottom align="center" variant="h5" component="div">
           {character.name}
