@@ -13,7 +13,7 @@ const RootLayoutWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: fit-content;
   justify-content: stretch;
 
   a:hover {
@@ -39,7 +39,7 @@ const LayoutBox = styled.div`
   flex-direction: column;
   width: 100vw;
   overflow-x: hidden;
-  min-height: 100vh;
+  height: fit-content;
 `;
 
 const Body = styled.main`
@@ -48,7 +48,6 @@ const Body = styled.main`
   align-items: flex-start;
   justify-content: center;
   min-height: calc(100vh - ${FOOTER_HEIGHT + HEADER_HEIGHT}px);
-  overflow-y: scroll;
 `;
 
 const RootLayout: React.FC<LayoutRouteProps> = () => {
