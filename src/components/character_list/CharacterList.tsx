@@ -6,6 +6,10 @@ import Loading from 'src/components/loading/Loading';
 import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH } from 'src/device/devices';
 import Character from 'src/models/Character';
 
+const CharacterListPageWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
+
 const CharacterListPageBox = styled.section`
   margin: 2rem;
   display: grid;
@@ -37,7 +41,7 @@ interface CharacterListProps {
 
 const CharacterList: React.FC<CharacterListProps> = ({ characterList, isReachedEnd, isLoading, bottomRef }) => {
   return (
-    <div className="layout-space">
+    <CharacterListPageWrapper className="layout-space">
       <CharacterListPageBox>
         {characterList.map((characterListItem, index) => (
           <CharacterCard isListItem={true} character={characterListItem} key={`character-list-item${index}`} />
@@ -48,7 +52,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ characterList, isReachedE
       ) : (
         <BottomSection id="character-list-bottom" ref={bottomRef as LegacyRef<HTMLDivElement>} />
       )}
-    </div>
+    </CharacterListPageWrapper>
   );
 };
 

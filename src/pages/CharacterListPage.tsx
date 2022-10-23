@@ -17,7 +17,7 @@ const CharacterListPage: React.FC = () => {
         type: CHARACTER_LIST_REQUEST,
       });
     }
-  }, [inView]);
+  }, [inView, characterListState.isReachedEnd]);
 
   return (
     <CharacterList
