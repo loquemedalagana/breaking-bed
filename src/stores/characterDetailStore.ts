@@ -9,6 +9,7 @@ import {
 } from 'src/actions/characterDetailActions';
 import restApiCharacterDetail from 'src/http/restApiCharacterDetail';
 import Character from 'src/models/Character';
+import characterListStore from 'src/stores/characterListStore';
 
 export interface CharacterDetailState {
   loading: boolean;
@@ -58,7 +59,7 @@ export const characterDetailReducer = (
 
 export interface CharacterDetailStore {
   state: CharacterDetailState;
-  fetchCharacterDetail: (characterId: string) => Promise<void>;
+  getCharacterDetailInfo: (characterId: string) => Promise<void>;
   getInitCharacterDetailState: () => void;
 }
 
@@ -81,13 +82,28 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
     }
   };
 
+  const getCharacterDetailInfo = async (characterId: string): Promise<void> => {
+    const [storedCharacterDetailData] = characterListStore
+      .getState()
+      .data.filter(data => data.characterId === Number(characterId));
+    try {
+      if (storedCharacterDetailData) {
+        dispatch({ type: CHARACTER_DETAIL_SUCCESS, payload: { data: storedCharacterDetailData } });
+      } else {
+        await fetchCharacterDetail(characterId);
+      }
+    } catch (e) {
+      dispatch({ type: CHARACTER_DETAIL_ERROR, payload: { error: e } });
+    }
+  };
+
   const getInitCharacterDetailState = (): void => {
     dispatch({ type: CHARACTER_DETAIL_INIT });
   };
 
   return {
     state,
-    fetchCharacterDetail,
+    getCharacterDetailInfo,
     getInitCharacterDetailState,
   };
 };

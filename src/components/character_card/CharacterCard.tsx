@@ -13,8 +13,9 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-import Character from 'src/models/Character';
+import Image from "src/components/image/Image";
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
+import Character from 'src/models/Character';
 import { URL_CHARACTERS } from 'src/routes/routeURL';
 
 const CardBox = styled(MuiCard)`
@@ -62,14 +63,6 @@ const CharacterInfo = styled(CardContent)`
   }
 `;
 
-const CardImage = styled.img`
-  align-self: center;
-  max-width: 80%;
-  @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
-    max-width: 50%;
-  }
-`;
-
 const Table = styled(MuiTable)`
   align-self: center;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
@@ -106,7 +99,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
       <ListPageCardBox id={`character-list-item-${character.characterId}`}>
         <StyledLink to={`${URL_CHARACTERS}/${character.characterId}`}>
           <CardButtonBox id={`goto-character-detail-${character.characterId}`}>
-            <CardImage src={character.img} alt={character.name} />
+            <Image src={character.img} alt={character.name} />
             <CharacterInfo>
               <Typography gutterBottom align="center" variant="h5" component="div">
                 {character.name}
@@ -128,7 +121,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
 
   return (
     <DetailPageCardBox id={`character-detail-${character.characterId}`}>
-      <CardImage src={character.img} alt={character.name} />
+      <Image src={character.img} alt={character.name} />
       <CharacterInfo>
         <Typography id={`character-name-${character.name}`} gutterBottom align="center" variant="h5" component="div">
           {character.name}

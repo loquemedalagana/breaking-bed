@@ -15,5 +15,6 @@
   "unknown": "desconocido/a",
   "Loading": "Cargando",
   "Source code is here": "El código fuente está aquí",
-  "He or she does not have quote.": "No tiene frase."
+  "He or she does not have quote.": "No tiene frase.",
+  "Image cannot be loaded.": "No se puede cargar la imagen."
 }
