@@ -82,6 +82,7 @@ describe('character list reducer test', () => {
     ).toEqual({
       ...samplePrevState,
       isReachedEnd: true,
+      loading: false,
     });
   });
 });
