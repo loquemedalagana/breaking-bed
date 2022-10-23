@@ -8,10 +8,10 @@ import {
 } from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
 import Character from 'src/models/Character';
-import { CharacterListState } from 'src/stores/characterListStore';
+import { CharacterListState, selectCharacterListState } from 'src/stores/characterListStore';
 
 export function* fetchCharacterList(): Generator {
-  const { page, isReachedEnd } = (yield select(state => state)) as CharacterListState;
+  const { page, isReachedEnd } = (yield select(selectCharacterListState)) as CharacterListState;
 
   try {
     if (isReachedEnd) {

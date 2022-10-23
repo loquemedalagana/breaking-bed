@@ -5,7 +5,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import * as characterListActions from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
-import { CharacterListState } from 'src/stores/characterListStore';
+import { CharacterListState, selectCharacterListState } from 'src/stores/characterListStore';
 import characterListRootSaga, { fetchCharacterList, watchFetchCharacterList } from 'src/actions/characterListSaga';
 import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
@@ -38,7 +38,7 @@ describe('unit testing for character list saga', () => {
     return await expectSaga(fetchCharacterList)
       .withState(samplePrevState)
       .provide([
-        [select((state: CharacterListState) => state), samplePrevState],
+        [select(selectCharacterListState), samplePrevState],
         [matchers.call.fn(restApiCharacterList), nextSampleData],
       ])
       .put({
@@ -54,7 +54,7 @@ describe('unit testing for character list saga', () => {
     return await expectSaga(fetchCharacterList)
       .withState(samplePrevState)
       .provide([
-        [select((state: CharacterListState) => state), samplePrevState],
+        [select(selectCharacterListState), samplePrevState],
         [matchers.call.fn(restApiCharacterList), throwError(new Error('error'))],
       ])
       .put({
@@ -77,7 +77,7 @@ describe('unit testing for character list saga', () => {
       })
       .provide([
         [
-          select((state: CharacterListState) => state),
+          select(selectCharacterListState),
           {
             ...samplePrevState,
             page: lastPageNumber,
