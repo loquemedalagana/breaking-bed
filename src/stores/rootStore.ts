@@ -1,13 +1,15 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 
-import characterListSaga from "src/actions/characterListSaga";
-import { characterListSlice } from "src/stores/characterListStore";
+import characterListSaga from 'src/actions/characterListSaga';
+import { appSlice } from 'src/stores/appStore';
+import { characterListSlice } from 'src/stores/characterListStore';
 
 const sagaMiddleWare = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   characterList: characterListSlice.reducer,
+  app: appSlice.reducer,
 });
 
 const rootStore = configureStore({
