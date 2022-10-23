@@ -63,14 +63,6 @@ const CharacterInfo = styled(CardContent)`
   }
 `;
 
-const CardImage = styled.img`
-  align-self: center;
-  max-width: 80%;
-  @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
-    max-width: 50%;
-  }
-`;
-
 const Table = styled(MuiTable)`
   align-self: center;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
