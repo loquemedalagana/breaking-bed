@@ -8,8 +8,18 @@ on:
 
 jobs:
   functional-test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: cache clean
+        run: yarn cache clean --force
       - name: package install
         run: yarn install
       - name: run test
