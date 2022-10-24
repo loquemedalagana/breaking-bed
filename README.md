@@ -127,11 +127,10 @@ yarn i18n
 
 ### Test
 
-- The `test` based on `jest` will be conducted automatically through `github-action`
+- All the tests will be conducted automatically through `github-action`
 - `saga`, `contexts`, `reducers` are tested via `Jest`
+- `UI` and `e2e` tests are conducted by `cypress`. [Test screenshots](https://github.com/loquemedalagana/breaking-bed/pull/35)
 - [All the automated test logs are available in this link](https://github.com/loquemedalagana/breaking-bed/actions)
-
-- `UI` and `e2e` tests are conducted by `cypress`
 
 ### internationalization by i18n
 
