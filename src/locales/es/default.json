@@ -2,7 +2,7 @@
   "nickname": "apodo/a",
   "status": "estado",
   "birthday": "nacimiento",
-  "occupations": "ocupaciones",
+  "occupation": "ocupación",
   "portrayed": "representado/a",
   "appearance": "aparición",
   "Load another quote": "Cargar otra frase",

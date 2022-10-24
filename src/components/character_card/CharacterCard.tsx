@@ -9,13 +9,10 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import styled from '@emotion/styled';
 import MuiCard from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import MuiTable from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
+import Table from 'src/components/table/Table';
 import Image from 'src/components/image/Image';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import Character from 'src/models/Character';
@@ -66,13 +63,6 @@ const CharacterInfo = styled(CardContent)`
   }
 `;
 
-const Table = styled(MuiTable)`
-  align-self: center;
-  @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
-    width: 100%;
-  }
-`;
-
 interface CharacterCardProps {
   character: Character;
   isListItem?: boolean;
@@ -102,6 +92,30 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
     }
   };
 
+  const itemNames: any = {
+    nickname: t('nickname'),
+    status: t('status'),
+    birthday: t('birthday'),
+    occupation: t('occupation'),
+    portrayed: t('portrayed'),
+    appearance: t('appearance'),
+  };
+
+  const characterInfo = Object.entries(character)
+    .filter(([key, value]) => value && itemNames[key] !== undefined)
+    .map(([key, value]) => {
+      if (key === 'birthday' && character.birthday) {
+        return [itemNames[key], getLocalizeBirthday(character.birthday)];
+      }
+      if (key === 'status' && character.status) {
+        return [itemNames[key], getCharacterState(character.status)];
+      }
+      if (typeof value === 'object') {
+        return [itemNames[key], JSON.stringify(value).replace(/(\[|\])|"/g, '')];
+      }
+      return [itemNames[key], value];
+    });
+
   if (isListItem) {
     return (
       <ListPageCardBox id={`character-list-item-${character.characterId}`}>
@@ -112,14 +126,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
               <Typography gutterBottom align="center" variant="h5" component="div">
                 {character.name}
               </Typography>
-              <Table size="small">
-                <TableBody>
-                  <TableRow>
-                    <TableCell>{t('status')}</TableCell>
-                    <TableCell align="right">{getCharacterState(character.status)}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+              <Table
+                id={character.characterId}
+                col={2}
+                row={1}
+                items={[[itemNames.status, getCharacterState(character.status)]]}
+              />
             </CharacterInfo>
           </CardButtonBox>
         </StyledLink>
@@ -134,44 +146,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isListItem }) 
         <Typography id={`character-name-${character.name}`} gutterBottom align="center" variant="h5" component="div">
           {character.name}
         </Typography>
-        <Table size="small">
-          <TableBody>
-            {character.nickname && (
-              <TableRow>
-                <TableCell>{t('nickname')}</TableCell>
-                <TableCell align="right">{character.nickname}</TableCell>
-              </TableRow>
-            )}
-            <TableRow>
-              <TableCell>{t('status')}</TableCell>
-              <TableCell align="right">{getCharacterState(character.status)}</TableCell>
-            </TableRow>
-            {character.birthday && (
-              <TableRow>
-                <TableCell>{t('birthday')}</TableCell>
-                <TableCell align="right">{getLocalizeBirthday(character.birthday)}</TableCell>
-              </TableRow>
-            )}
-            {character.occupation && (
-              <TableRow>
-                <TableCell>{t('occupations')}</TableCell>
-                <TableCell align="right">{character.occupation?.join(', ')}</TableCell>
-              </TableRow>
-            )}
-            {character.portrayed && (
-              <TableRow>
-                <TableCell>{t('portrayed')}</TableCell>
-                <TableCell align="right">{character.portrayed}</TableCell>
-              </TableRow>
-            )}
-            {character.appearance && (
-              <TableRow>
-                <TableCell>{t('appearance')}</TableCell>
-                <TableCell align="right">{character.appearance.join(', ')}</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+        <Table id={character.characterId} col={2} row={characterInfo.length} items={characterInfo} />
       </CharacterInfo>
     </DetailPageCardBox>
   );
