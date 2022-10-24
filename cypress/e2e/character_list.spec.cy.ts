@@ -52,14 +52,17 @@ describe('e2e test of the character list', () => {
       cy.scrollTo('bottom');
       cy.get('#character-list-bottom');
       cy.get('#item-loading')
+        .if()
         .window()
         .its('store')
         .invoke('getState')
         .its('characterList')
         .its('loading')
         .should('deep.equal', true)
-        .wait(2000)
-        .window()
+        .else()
+        .log('Data was already loaded');
+      cy.wait(2000);
+      cy.window()
         .its('store')
         .invoke('getState')
         .its('characterList')
