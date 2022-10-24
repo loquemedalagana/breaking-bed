@@ -2,9 +2,9 @@ name: CI Test
 
 on:
   push:
-    branches: [dev, 'release/**']
+    branches: [dev, master, 'release/**']
   pull_request:
-    branches: [dev, 'release/**', 'feature/**']
+    branches: [dev, master, 'release/**', 'feature/**']
 
 jobs:
   functional-test:
@@ -24,3 +24,21 @@ jobs:
         run: yarn install
       - name: run test
         run: yarn test
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4 # use the explicit version number
+        with:
+          spec: cypress/e2e/*.spec.cy.ts
+          browser: chrome
+          build: yarn build
+          start: yarn start
