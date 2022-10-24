@@ -9,9 +9,8 @@ on:
 jobs:
   functional-test:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        - name: package install
-          run: yarn install
-        - name: run test
-          run: yarn test
+    steps:
+      - name: package install
+        run: yarn install
+      - name: run test
+        run: yarn test
