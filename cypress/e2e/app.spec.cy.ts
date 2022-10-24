@@ -9,7 +9,12 @@ describe('show pages correctly', () => {
     const [RANDOM_CHARACTER_ID_MIN, RANDOM_CHARACTER_ID_MAX] = [1, 30];
     const randomCharacterId = Math.floor(Math.random() * (RANDOM_CHARACTER_ID_MAX - RANDOM_CHARACTER_ID_MIN) + 1);
     cy.visit(`/${randomCharacterId}`);
-    cy.wait(3000);
+  });
+
+  it('switch the language', () => {
+    cy.get('header').get('select').select('es');
+    cy.wait(1000);
+    cy.get('table').contains('td', 'estado');
   });
 
   it('show error page', () => {
