@@ -57,15 +57,17 @@ describe('to test invalid request', () => {
   const wrongId = 'blabla';
   beforeEach(() => {
     cy.intercept('GET', `${GET_CHARACTERS}/${wrongId}`).as(CHARACTER_DETAIL_BAD_REQUEST);
+    cy.visit('/');
+    cy.visit(`/${wrongId}`);
   });
 
   it('to receive error code', () => {
-    cy.visit(`/${wrongId}`);
     cy.get('#page-loading');
-    cy.get(`@${CHARACTER_DETAIL_BAD_REQUEST}`).its('response.statusCode').should('eq', 500);
+    cy.wait(`@${CHARACTER_DETAIL_BAD_REQUEST}`).its('response.statusCode').should('eq', 500);
   });
 
-  it('detect go back button', () => {
-    cy.get('#go-back-button');
+  it('detect go back button and redirect to previous page', () => {
+    cy.get('#go-back-button').click();
+    cy.location('pathname').should('equal', '/');
   });
 });
