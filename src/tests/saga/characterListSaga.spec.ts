@@ -1,4 +1,4 @@
-import { fork, select, throttle } from 'redux-saga/effects';
+import { select, throttle } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
@@ -6,7 +6,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import * as characterListActions from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
 import { CharacterListState, selectCharacterListState } from 'src/stores/characterListStore';
-import characterListRootSaga, { fetchCharacterList, watchFetchCharacterList } from 'src/actions/characterListSaga';
+import { fetchCharacterList, watchFetchCharacterList } from 'src/actions/characterListSaga';
 import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
 describe('unit testing for character list saga', () => {
@@ -21,11 +21,6 @@ describe('unit testing for character list saga', () => {
     error: null,
     isReachedEnd: false,
   };
-
-  it('to test root saga', () => {
-    const rootGen = characterListRootSaga();
-    expect(rootGen.next().value).toEqual(fork(watchFetchCharacterList));
-  });
 
   it('to test watch saga', () => {
     const watchGen = watchFetchCharacterList();
