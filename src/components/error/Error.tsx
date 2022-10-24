@@ -44,9 +44,10 @@ const ErrorTextBox = styled.div`
 
 interface ErrorProps {
   isErrorPage?: boolean;
+  is404?: boolean;
 }
 
-const Error: React.FC<ErrorProps> = ({ isErrorPage }) => {
+const Error: React.FC<ErrorProps> = ({ isErrorPage, is404 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -59,8 +60,8 @@ const Error: React.FC<ErrorProps> = ({ isErrorPage }) => {
       <ErrorPageBox id="error-page">
         <ErrorContentBox>
           <h1>Error..</h1>
-          <h2>{t('Something went wrong..')}</h2>
-          <h3>{t('Please try again.')}</h3>
+          <h2>{is404 ? t('404 Not Found') : t('Something went wrong..')}</h2>
+          <h3>{is404 ? t('Sorry, we can’t find that page') : t('Please try again.')}</h3>
           <Button id="go-back-button" variant="contained" onClick={handleGoBack}>
             {t('Go back')}
           </Button>
