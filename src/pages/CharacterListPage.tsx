@@ -4,10 +4,12 @@ import { useInView } from 'react-intersection-observer';
 
 import { CHARACTER_LIST_REQUEST } from 'src/actions/characterListActions';
 import CharacterList from 'src/components/character_list/CharacterList';
+// import { selectAppState } from 'src/stores/appStore';
 import { selectCharacterListState } from 'src/stores/characterListStore';
 
 const CharacterListPage: React.FC = () => {
   const dispatch = useDispatch();
+  //  const appState = useSelector(selectAppState);
   const characterListState = useSelector(selectCharacterListState);
   const [bottomRef, inView] = useInView({});
 
