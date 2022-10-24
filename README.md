@@ -2,7 +2,7 @@
 
 This repository is for the application where the details of the characters of the Breaking Bed.
 
-- the server is based on [Breaking Bed open API](https://github.com/timbiles/Breaking-Bad--API)
+- the server is based on [Breaking Bed open API](https://github.com/timbiles/Breaking-Bad--API).
 
 ## Basic Commands
 
@@ -115,26 +115,57 @@ yarn i18n
 
 ### UI
 
-- All UI components are in `src/components` directory
-- For responsive UI, the devices' sizes are defined in `src/device/devices.js`
+- All UI components are in `src/components` directory.
+- For responsive UI, the devices' sizes are defined in `src/device/devices.js`.
+
+#### Atomic Components
+
+- `Image` component shows `error message` when the image cannot be loaded.
+- `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
+- `Select Language` to select language.
+- `Loading`to show changeable loading spinner depending on its parent element's size.
+
+#### Molecule Components
+
+- `Quote`component is composed of `one quote` and `button to load another quote`. In the loading state, it shows loading spinner, and if the character doesn't have any quote, it shows message in Spanish as well as English depending on the language state of the app.
+
+#### Organism Components
+
+- `Header` marked up with `<header/>` tag.
+- `Footer` marked up with `<footer/>` tag.
+- `Character List` to show character list
+- `Character Detail` to show character detail and his or her quote.
+- `Error` to show error. It receives a prop to render error message differently: in page, in quote.
+
+#### Template Component
+
+- `RootLayout` in the `src/routes` directory.
+
+#### Page Components
+
+- All components in the `src/pages` directory, which connect business logic to UI components.
+
+<hr />
 
 ### Business logics
 
 - All component files in `src/pages` directory are for connecting business logics to UI components.
 - All files to request data to server are in `/http` directory
-- The business logic of `Character List` is treated by `src/actions/characterListSaga.ts`
+- The business logics of `Character List` are treated by `src/actions/characterListSaga.ts`
 - The business logics of `Character Detail` and `Quote` are handled by `custom hooks(use...Store.ts)` in `src/store/...Store.ts`
 
 ### Test
 
-- All the tests will be conducted automatically through `github-action`
-- `saga`, `contexts`, `reducers` are tested via `Jest`
-- `UI` and `e2e` tests are conducted by `cypress`. [Test screenshots](https://github.com/loquemedalagana/breaking-bed/pull/35)
-- [All the automated test logs are available in this link](https://github.com/loquemedalagana/breaking-bed/actions)
+- All the tests will be conducted automatically through `github-action`.
+- `saga`, `contexts`, `reducers` are tested via `Jest`.
+- `UI` and `e2e` tests are conducted by `cypress`. [Test screenshots](https://github.com/loquemedalagana/breaking-bed/pull/35).
+- [All the automated test logs are available in this link](https://github.com/loquemedalagana/breaking-bed/actions).
 
-### internationalization by i18n
+### internationalization by `i18n`
 
-- All translations are saved in `src/locales` in `Spanish` as well as `English`
+- All translations are saved in `src/locales` in `Spanish` as well as `English`.
+- `Select Language` element is situated in the `header`.
+- `dayjs` was used to show a character's birthday in the internationalized format, English and Spanish.
 
 <hr/>
 
@@ -144,9 +175,9 @@ yarn i18n
 
 #### action
 
-- Types are defined in `characterListActions.ts`
+- Types are defined in `characterListActions.ts`.
 - Fetching the list is handled by `fetchCharacterList Saga` checking the current state of character list.
-- When an user reaches the bottom, `characterListRequest action` will be triggered through `intersection observer` after calling `watchFetchedCharacterList` saga.
+- When an user reaches the bottom, which is intersecting through the viewport, `characterListRequest action` will be triggered after calling `watchFetchedCharacterList` saga.
 - If all information has been loaded, `getReachedEnd` action will be triggered.
 - If an error is detected, the app will be redirected to `error page` through `error action`.
 
@@ -210,3 +241,6 @@ yarn i18n
 - I used `Context` to get its state directly in the `Quote` UI component, which has too many parent components.
 - Like `CharacterDetail`, the custom hook can be defined without restriction of the rule of `Redux`.
 - To initiate the `RandomQuoteState` directly in the `CharacterDetailPage` without `prop drilling`.
+
+
+<hr />
