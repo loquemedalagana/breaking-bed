@@ -2,41 +2,37 @@ import * as appActions from 'src/actions/appActions';
 import { appReducer, AppState, initialState } from 'src/stores/appStore';
 
 describe('app reducer test', () => {
+  const sampleAppState: AppState = {
+    error: {
+      statusCode: 404,
+      type: 'character-detail',
+      message: 'Not found error.',
+    },
+  };
+
   it('should return initial state', () => {
     expect(appReducer(undefined, { type: undefined })).toEqual(initialState);
   });
 
-  it('save scroll position', () => {
+  it('after receive the error...', () => {
     expect(
-      appReducer(undefined, {
-        type: appActions.saveScrollPosition,
+      appReducer(initialState, {
+        type: appActions.SAVE_ERROR_MESSAGE,
         payload: {
-          scrollPos: {
-            x: 50,
-            y: 1500,
+          error: {
+            statusCode: 404,
+            type: 'character-detail',
+            message: 'Not found error.',
           },
         },
       }),
-    ).toEqual({
-      ...initialState,
-      scrollPos: {
-        x: 50,
-        y: 1500,
-      },
-    });
+    ).toEqual(sampleAppState);
   });
 
-  it('restore scroll position', () => {
-    expect(
-      appReducer(
-        {
-          scrollPos: {
-            x: 50,
-            y: 1500,
-          },
-        },
-        { type: appActions.restoreScrollPosition },
-      ),
-    ).toEqual(initialState);
+  it('reset the error after the error component is unmounted', () => {
+    expect(appReducer(sampleAppState, { type: appActions.RESET_ERROR_MESSAGE })).toEqual({
+      ...sampleAppState,
+      error: null,
+    });
   });
 });

@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { saveScrollPosition, restoreScrollPosition } from 'src/actions/appActions';
+import { saveErrorMessage, resetErrorMessage } from 'src/actions/appActions';
 import { RootState } from 'src/stores/rootStore';
 
 export interface AppState {
-  scrollPos: { x: number; y: number } | undefined;
+  error: {
+    type: 'character-list' | 'character-detail' | 'quote' | undefined;
+    statusCode: number | undefined;
+    message: string;
+  } | null;
 }
 
 export const initialState: AppState = {
-  scrollPos: undefined,
+  error: null,
 };
 
 export const appSlice = createSlice({
@@ -17,16 +21,16 @@ export const appSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(saveScrollPosition, (state, action) => {
+      .addCase(saveErrorMessage, (state, action) => {
         return {
           ...state,
-          scrollPos: action.payload.scrollPos,
+          error: action.payload.error,
         };
       })
-      .addCase(restoreScrollPosition, state => {
+      .addCase(resetErrorMessage, state => {
         return {
           ...state,
-          scrollPos: undefined,
+          error: null,
         };
       })
       .addDefaultCase(state => {

@@ -45,9 +45,10 @@ const ErrorTextBox = styled.div`
 interface ErrorProps {
   isErrorPage?: boolean;
   is404?: boolean;
+  errorType?: 'character-list' | 'character-detail' | 'quote';
 }
 
-const Error: React.FC<ErrorProps> = ({ isErrorPage, is404 }) => {
+const Error: React.FC<ErrorProps> = ({ isErrorPage, is404, errorType }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

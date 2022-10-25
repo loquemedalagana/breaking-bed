@@ -1,6 +1,7 @@
-import { fork } from 'redux-saga/effects';
-import { watchFetchCharacterList } from 'src/actions/characterListSaga';
+import { all } from 'redux-saga/effects';
+import characterListRootSaga from 'src/actions/characterListSaga';
+import rootAppSaga from 'src/actions/appSaga';
 
 export default function* rootSaga(): Generator {
-  yield fork(watchFetchCharacterList);
+  yield all([characterListRootSaga(), rootAppSaga()]);
 }

@@ -37,7 +37,7 @@ module.exports = {
       },
     },
     lngs: ['en', 'es'],
-    ns: ['default'],
+    ns: ['default', 'error'],
     defaultLng: 'en',
     defaultNs: 'default',
     defaultValue(lng, ns, key) {

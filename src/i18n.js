@@ -12,7 +12,7 @@ i18n
     fallbackLng: 'en',
     lng: 'en',
     debug: true,
-    ns: ['default'],
+    ns: ['default', 'error'],
     load: 'languageOnly',
     defaultNS: 'default',
     keySeparator: false, // we do not use keys in form messages.welcome
