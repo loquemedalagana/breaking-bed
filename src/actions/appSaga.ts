@@ -1,4 +1,4 @@
-import { put, select, all, takeLatest } from 'redux-saga/effects';
+import { put, select, all, takeLatest, fork } from 'redux-saga/effects';
 
 import { SAVE_ERROR_MESSAGE, RESET_ERROR_MESSAGE } from 'src/actions/appActions';
 import { selectAppState, AppState } from 'src/stores/appStore';
@@ -18,5 +18,5 @@ export function* resetErrorMessage(): Generator {
 }
 
 export default function* rootAppSaga(): Generator {
-  yield all([watchLSaveErrorMessage(), resetErrorMessage()]);
+  yield all([fork(watchLSaveErrorMessage), fork(resetErrorMessage)]);
 }

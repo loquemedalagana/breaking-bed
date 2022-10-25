@@ -6,7 +6,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import * as characterListActions from 'src/actions/characterListActions';
 import restApiCharacterList from 'src/http/restApiCharacterList';
 import { CharacterListState, selectCharacterListState } from 'src/stores/characterListStore';
-import characterListRootSaga, { fetchCharacterList, watchFetchCharacterList } from 'src/actions/characterListSaga';
+import rootCharacterListSaga, { fetchCharacterList, watchFetchCharacterList } from 'src/actions/characterListSaga';
 import { getSampleDataList } from 'src/tests/mocks/mockedCharacterList';
 
 describe('unit testing for character list saga', () => {
@@ -23,7 +23,7 @@ describe('unit testing for character list saga', () => {
   };
 
   it('to test root saga', () => {
-    const rootGen = characterListRootSaga();
+    const rootGen = rootCharacterListSaga();
     expect(rootGen.next().value).toEqual(fork(watchFetchCharacterList));
   });
 

@@ -62,6 +62,6 @@ export function* watchFetchCharacterList(): Generator {
   yield throttle(3000, CHARACTER_LIST_REQUEST, fetchCharacterList);
 }
 
-export default function* characterListRootSaga(): Generator {
+export default function* rootCharacterListSaga(): Generator {
   yield fork(watchFetchCharacterList);
 }
