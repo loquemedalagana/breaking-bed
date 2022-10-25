@@ -52,7 +52,7 @@ const Quote: React.FC = () => {
   }
 
   if (randomQuoteStore?.state.error) {
-    return <Error errorType="quote" />;
+    return <Error />;
   }
 
   return <QuoteBox id="quote-text-empty">{t('He or she does not have any quote.')}</QuoteBox>;

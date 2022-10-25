@@ -1,0 +1,6 @@
+{
+  "404": "<0>Página no encontrada</0><1>Lo sentimos, no podemos encontrar esa página.<1>",
+  "default": "<0>Algo salió mal..</0><1>Por favor, vuelva a intentarlo.<1>",
+  "character-list": "<0>Algo salió mal<br/>al cargar la lista de personajes.</0><1>Por favor, vuelva a intentarlo.<1>",
+  "character-detail": "<0>Algo salió mal<br/>al cargar los detalles del personaje.</0><1>Por favor, vuelva a intentarlo.<1>"
+}

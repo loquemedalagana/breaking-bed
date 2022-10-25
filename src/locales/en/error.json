@@ -1,0 +1,6 @@
+{
+  "404": "<0>404 Not Found</0><1>Sorry, we can’t find that page.<1>",
+  "default": "<0>Something went wrong..</0><1>Please try again.<1>",
+  "character-list": "<0>Something went wrong,<br>when loading character list.</0><1>Please try again.<1>",
+  "character-detail": "<0>Something went wrong,<br>when loading character detail.</0><1>Please try again.<1>"
+}
