@@ -6,8 +6,8 @@ import { RootState } from 'src/stores/rootStore';
 export interface AppState {
   error: {
     type: 'character-list' | 'character-detail' | 'quote' | undefined;
-    statusCode: number | undefined;
-    message: string;
+    status: number | undefined;
+    statusText: string;
   } | null;
 }
 

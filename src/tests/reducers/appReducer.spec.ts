@@ -4,9 +4,9 @@ import { appReducer, AppState, initialState } from 'src/stores/appStore';
 describe('app reducer test', () => {
   const sampleAppState: AppState = {
     error: {
-      statusCode: 404,
+      status: 404,
       type: 'character-detail',
-      message: 'Not found error.',
+      statusText: 'Not found error.',
     },
   };
 
@@ -20,9 +20,7 @@ describe('app reducer test', () => {
         type: appActions.SAVE_ERROR_MESSAGE,
         payload: {
           error: {
-            statusCode: 404,
-            type: 'character-detail',
-            message: 'Not found error.',
+            ...sampleAppState.error,
           },
         },
       }),
