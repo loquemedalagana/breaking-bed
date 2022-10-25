@@ -1,0 +1,44 @@
+name: CI Test
+
+on:
+  push:
+    branches: [dev, master, 'release/**']
+  pull_request:
+    branches: [dev, master, 'release/**', 'feature/**']
+
+jobs:
+  functional-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: cache clean
+        run: yarn cache clean --force
+      - name: package install
+        run: yarn install
+      - name: run test
+        run: yarn test
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v4 # use the explicit version number
+        with:
+          spec: cypress/e2e/*.spec.cy.ts
+          browser: chrome
+          build: yarn build
+          start: yarn start

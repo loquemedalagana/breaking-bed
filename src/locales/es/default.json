@@ -2,7 +2,7 @@
   "nickname": "apodo/a",
   "status": "estado",
   "birthday": "nacimiento",
-  "occupations": "ocupaciones",
+  "occupation": "ocupación",
   "portrayed": "representado/a",
   "appearance": "aparición",
   "Load another quote": "Cargar otra frase",
@@ -15,6 +15,8 @@
   "unknown": "desconocido/a",
   "Loading": "Cargando",
   "Source code is here": "El código fuente está aquí",
-  "He or she does not have quote.": "No tiene frase.",
-  "Image cannot be loaded.": "No se puede cargar la imagen."
+  "He or she does not have any quote.": "No tiene ninguna frase.",
+  "Image cannot be loaded.": "No se puede cargar la imagen.",
+  "404 Not Found": "404 no encontrada",
+  "Sorry, we can’t find that page": "Lo sentimos, no podemos encontrar esa página."
 }

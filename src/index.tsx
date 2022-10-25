@@ -5,9 +5,16 @@ import App from 'src/App';
 import reportWebVitals from 'src/reportWebVitals';
 
 import 'src/i18n';
+import rootStore from 'src/stores/rootStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
+
+// @ts-expect-error
+if (window.Cypress) {
+  // @ts-expect-error
+  window.store = rootStore;
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

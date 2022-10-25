@@ -2,7 +2,7 @@
   "nickname": "nickname",
   "status": "status",
   "birthday": "birthday",
-  "occupations": "occupations",
+  "occupation": "occupation",
   "portrayed": "portrayed",
   "appearance": "appearance",
   "Load another quote": "Load another quote",
@@ -15,6 +15,8 @@
   "unknown": "unknown",
   "Loading": "Loading",
   "Source code is here": "Source code is here",
-  "He or she does not have quote.": "He or she does not have quote.",
-  "Image cannot be loaded.": "Image cannot be loaded."
+  "He or she does not have any quote.": "He or she does not have any quote.",
+  "Image cannot be loaded.": "Image cannot be loaded.",
+  "404 Not Found": "404 Not Found",
+  "Sorry, we can’t find that page": "Sorry, we can’t find that page"
 }

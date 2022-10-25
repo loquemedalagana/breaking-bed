@@ -4083,6 +4083,13 @@ csstype@^3.0.2, csstype@^3.1.1:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
+cypress-if@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/cypress-if/-/cypress-if-1.10.1.tgz#3f19f3b6c1d8044754ee705ad189a407ea0c9a99"
+  integrity sha512-sZ2Tv7ktKfPehbZzaIzvZg4NZMymFq1AN+HZ9lJIJCq2dQ5sJ6pYBKH49FMe5ErWKmE04hy3GR//ybj0C2E40g==
+  dependencies:
+    debug "^4.3.4"
+
 cypress@^10.10.0:
   version "10.10.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-10.10.0.tgz#fd671297b2ca3e64dfffd55fe3857c388cfbb695"
