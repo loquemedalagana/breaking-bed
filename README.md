@@ -244,3 +244,20 @@ yarn i18n
 
 
 <hr />
+
+## Error Management
+- This api doesn't receive 404 status code when requesting with an invalid url.
+- When an error is detected, the error state is saved in `appStore`.
+
+### Expected Error
+
+#### Character List
+- When the offset number is grater than the greatest character's id, it returns `an empty array`.
+
+#### Character Detail
+- When requesting an invalid character id, it returns `500` status code.
+
+#### Quote
+- When requesting a quote of a character without quote, it returns `an empty array`.
+
+#### 404 Not Found

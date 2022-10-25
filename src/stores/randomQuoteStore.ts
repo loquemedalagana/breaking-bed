@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-
+import axios from 'axios';
 import {
   RANDOM_QUOTE_ERROR,
   RANDOM_QUOTE_INIT,
@@ -71,7 +71,28 @@ const useRandomQuoteStore = (): RandomQuoteStore => {
       const data = await restApiRandomQuote(characterName);
       dispatch({ type: RANDOM_QUOTE_SUCCESS, payload: { data } });
     } catch (e) {
-      dispatch({ type: RANDOM_QUOTE_ERROR, payload: { error: e } });
+      if (axios.isAxiosError(e)) {
+        dispatch({
+          type: RANDOM_QUOTE_ERROR,
+          payload: {
+            error: {
+              ...e.response,
+              type: 'quote',
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: RANDOM_QUOTE_ERROR,
+          payload: {
+            error: {
+              type: 'quote',
+              status: undefined,
+              statusText: undefined,
+            },
+          },
+        });
+      }
     }
   };
 

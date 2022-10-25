@@ -15,19 +15,32 @@ describe('Random Quote Store Hook', () => {
     return <RandomQuoteContext.Provider value={value}>{children}</RandomQuoteContext.Provider>;
   };
 
-  // @ts-expect-error
-  const { result } = renderHook(() => useRandomQuoteStore(), { wrapper });
-
   it(`to fetch random quote of ${sampleCharacterName}`, async () => {
+    // @ts-expect-error
+    const { result } = renderHook(() => useRandomQuoteStore(), { wrapper });
+
     await act(async () => {
       await result.current.fetchCharacterRandomQuote(sampleCharacterName);
     });
-
+    console.log(result.current.state);
     expect(
       sampleMockedQuoteList.filter(
         quoteData =>
           quoteData.quote === result.current.state.data?.quote && quoteData.author === result.current.state.data.author,
       ).length,
     ).toBeGreaterThanOrEqual(1);
+  });
+
+  it('to request a quote of a character without quote', async () => {
+    // @ts-expect-error
+    const { result } = renderHook(() => useRandomQuoteStore(), { wrapper });
+    await act(async () => {
+      await result.current.fetchCharacterRandomQuote('Gonzo');
+    });
+    expect(result.current.state).toEqual({
+      loading: false,
+      data: null,
+      error: null,
+    });
   });
 });

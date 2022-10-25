@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import axios from 'axios';
 
 import {
   CHARACTER_DETAIL_ERROR,
@@ -78,7 +79,28 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
       const data = await restApiCharacterDetail(characterId);
       dispatch({ type: CHARACTER_DETAIL_SUCCESS, payload: { data } });
     } catch (e) {
-      dispatch({ type: CHARACTER_DETAIL_ERROR, payload: { error: e } });
+      if (axios.isAxiosError(e)) {
+        dispatch({
+          type: CHARACTER_DETAIL_ERROR,
+          payload: {
+            error: {
+              ...e.response,
+              type: 'character-detail',
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: CHARACTER_DETAIL_ERROR,
+          payload: {
+            error: {
+              type: 'character-detail',
+              status: undefined,
+              statusText: undefined,
+            },
+          },
+        });
+      }
     }
   };
 
@@ -93,7 +115,28 @@ const useCharacterDetailStore = (): CharacterDetailStore => {
         await fetchCharacterDetail(characterId);
       }
     } catch (e) {
-      dispatch({ type: CHARACTER_DETAIL_ERROR, payload: { error: e } });
+      if (axios.isAxiosError(e)) {
+        dispatch({
+          type: CHARACTER_DETAIL_ERROR,
+          payload: {
+            error: {
+              ...e.response,
+              type: 'character-detail',
+            },
+          },
+        });
+      } else {
+        dispatch({
+          type: CHARACTER_DETAIL_ERROR,
+          payload: {
+            error: {
+              type: 'character-detail',
+              status: undefined,
+              statusText: undefined,
+            },
+          },
+        });
+      }
     }
   };
 
