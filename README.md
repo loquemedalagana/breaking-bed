@@ -57,6 +57,7 @@ yarn i18n
 
 ```
 .
+├── .github/workflows # CI test scripts
 ├── cypress/
 │   └── e2e/
 ├── public/
@@ -87,6 +88,7 @@ yarn i18n
 │   │   ├── routes.ts
 │   │   └── routeURL.ts
 │   ├── stores/
+│   │   ├── appStore.tsx
 │   │   ├── BreakingBadProvider.tsx
 │   │   ├── contexts.ts // context api files
 │   │   ├── characterDetailStore.ts
@@ -171,6 +173,10 @@ yarn i18n
 
 ## State Management
 
+### App - `Redux Saga`
+
+- Currently `AppState`only saves `error` information, where it occurs, such as `/`, `/404`, `/:characterId`.
+
 ### Character List - `Redux Saga`
 
 #### action
@@ -184,6 +190,7 @@ yarn i18n
 #### Reducer
 
 - The reducer is defined in `characterListStore.ts` as `characterListSlice`.
+- So `appSagas` are relatively simple only calling `take` effect because these actions are not asynchronous.
 
 #### How to be used in components?
 
@@ -242,22 +249,29 @@ yarn i18n
 - Like `CharacterDetail`, the custom hook can be defined without restriction of the rule of `Redux`.
 - To initiate the `RandomQuoteState` directly in the `CharacterDetailPage` without `prop drilling`.
 
-
 <hr />
 
 ## Error Management
+
 - This api doesn't receive 404 status code when requesting with an invalid url.
 - When an error is detected, the error state is saved in `appStore`.
 
 ### Expected Error
 
 #### Character List
+
 - When the offset number is grater than the greatest character's id, it returns `an empty array`.
 
 #### Character Detail
+
 - When requesting an invalid character id, it returns `500` status code.
 
 #### Quote
+
 - When requesting a quote of a character without quote, it returns `an empty array`.
 
 #### 404 Not Found
+
+- `Invalid Route` error is detected in `react-router-dom`.
+
+<hr />
